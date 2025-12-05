@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Store -By Mohamed Ashraf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0A84FF;
+            --secondary-color: #5E5CE6;
+            --background-color: #1C1C1E;
+            --card-color: #2C2C2E;
+            --text-color: #F2F2F7;
+            --accent-color: #30D158;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        .light-mode {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --background-color: #F2F2F7;
+            --card-color: #FFFFFF;
+            --text-color: #1D1D1F;
+            --accent-color: #34C759;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            border-radius: 16px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-color);
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp { color: #25D366; }
+        .instagram { color: #E4405F; }
+        .telegram { color: #0088CC; }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Download Modal */
+        .download-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .download-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+        }
+
+        .modal-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .download-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--background-color);
+            border-radius: 14px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .download-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .option-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .option-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .whatsapp-icon { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .ios-icon { background: linear-gradient(135deg, #0A84FF, #5E5CE6); }
+        .instagram-icon { background: linear-gradient(135deg, #E4405F, #C13584); }
+        .telegram-icon { background: linear-gradient(135deg, #0088CC, #005888); }
+        .tiktok-icon { background: linear-gradient(135deg, #000000, #69C9D0); }
+        .capcut-icon { background: linear-gradient(135deg, #8B4513, #D2691E); }
+        .inshot-icon { background: linear-gradient(135deg, #FF6B6B, #FF8E53); }
+        .picsart-icon { background: linear-gradient(135deg, #6A11CB, #2575FC); }
+        .youtube-icon { background: linear-gradient(135deg, #FF0000, #CC0000); }
+        .spotify-icon { background: linear-gradient(135deg, #1DB954, #1ED760); }
+        .thispc-icon { background: linear-gradient(135deg, #0078D7, #00A2F3); }
+        .iosapps-icon { 
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            position: relative;
+            overflow: hidden;
+        }
+        .watchapps-icon { background: linear-gradient(135deg, #000000, #FF0000); }
+        .duolingo-icon { 
+            background: linear-gradient(135deg, #000000, #58CC02); 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .option-details p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .download-btn {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            border: 1px solid var(--primary-color);
+        }
+
+        .download-btn:hover {
+            background-color: rgba(10, 132, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-color);
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* App Detail Modal */
+        .app-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .app-detail-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .app-detail-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .app-detail-modal.active .app-detail-content {
+            transform: translateY(0);
+        }
+
+        .app-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .app-detail-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .app-detail-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-detail-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .app-detail-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .app-features {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .app-features h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .app-features ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .app-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .app-detail-footer {
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-detail-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .app-detail-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Apps Section */
+        .apps-container {
+            background-color: var(--card-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .apps-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .apps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .app-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--background-color);
+            border-radius: 14px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .app-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-icon.pro-badge::after {
+            content: "PRO";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 8px;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 4px;
+            border: 1px solid #000;
+        }
+
+        .whatsapp-icon { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .instagram-icon { background: linear-gradient(135deg, #E4405F, #C13584); }
+        .telegram-icon { background: linear-gradient(135deg, #0088CC, #005888); }
+        .tiktok-icon { background: linear-gradient(135deg, #000000, #69C9D0); }
+        .capcut-icon { background: linear-gradient(135deg, #8B4513, #D2691E); }
+        .inshot-icon { background: linear-gradient(135deg, #FF6B6B, #FF8E53); }
+        .picsart-icon { background: linear-gradient(135deg, #6A11CB, #2575FC); }
+        .youtube-icon { background: linear-gradient(135deg, #FF0000, #CC0000); }
+        .spotify-icon { background: linear-gradient(135deg, #1DB954, #1ED760); }
+        .thispc-icon { background: linear-gradient(135deg, #0078D7, #00A2F3); }
+        .watchapps-icon { background: linear-gradient(135deg, #000000, #FF0000); }
+        .iosapps-icon { 
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            position: relative;
+            overflow: hidden;
+        }
+        .studyapps-icon { 
+    background: linear-gradient(135deg, #4A90E2, #2E5B9E); 
+    position: relative;
+    overflow: hidden;
+}
+
+        .app-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .app-details p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .get-now-btn {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .get-now-btn:hover {
+            background-color: rgba(10, 132, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* About Button */
+        .about-button-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .about-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Welcome Modal */
+        .welcome-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .welcome-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .welcome-modal .modal-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .welcome-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.4rem;
+        }
+
+        .modal-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            flex: 1;
+            justify-content: center;
+            min-width: 110px;
+        }
+
+        .contact-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .contact-telegram {
+            background-color: #0088CC;
+            color: white;
+        }
+
+        .contact-instagram {
+            background-color: #E4405F;
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* About Modal */
+        .about-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .about-modal .modal-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .about-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .about-content p {
+            margin-bottom: 12px;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .developer {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        /* Audio Control */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        .audio-control.muted {
+            background: #ff4757;
+        }
+
+        /* AI Assistant Control */
+        .ai-control {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            background: white;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .ai-control img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .ai-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* NEW ANIMATIONS */
+        /* Animations for app items */
+        .app-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .app-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slide animations for modals */
+        .modal-content, .app-detail-content {
+            transform: translateY(-50px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .download-modal.active .modal-content,
+        .app-detail-modal.active .app-detail-content,
+        .welcome-modal.active .modal-content,
+        .about-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* Staggered animation for app items */
+        .app-item:nth-child(odd) {
+            transform: translateX(-50px);
+        }
+
+        .app-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .app-item.animate:nth-child(odd),
+        .app-item.animate:nth-child(even) {
+            transform: translateX(0);
+        }
+
+        /* Hover animations */
+        .app-item:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Button hover effects */
+        .get-now-btn, .download-btn, .app-detail-btn, .about-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .get-now-btn:hover, .download-btn:hover, .app-detail-btn:hover, .about-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(10, 132, 255, 0.4);
+        }
+
+        /* Social icons animation */
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Logo animation */
+        .logo {
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Search input animation */
+        .search-input {
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 2px var(--primary-color), 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* App icon animations */
+        .app-icon, .option-icon, .app-detail-icon {
+            transition: all 0.3s ease;
+        }
+
+        .app-icon:hover, .option-icon:hover, .app-detail-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Loading animation for buttons */
+        .get-now-btn.loading, .download-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .get-now-btn.loading::after, .download-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating animation for audio control */
+        .audio-control, .ai-control {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Page load animation */
+        .container {
+            animation: pageLoad 0.8s ease-out;
+        }
+
+        @keyframes pageLoad {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced app item styling */
+        .app-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .app-item:hover::after {
+            left: 100%;
+        }
+
+        /* Enhanced modal backdrop */
+        .download-modal, .app-detail-modal, .welcome-modal, .about-modal {
+            backdrop-filter: blur(10px);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced focus states */
+        button:focus, a:focus, input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                gap: 10px;
+                padding: 12px 15px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .social-icons {
+                gap: 8px;
+            }
+
+            .social-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                padding: 0 10px;
+            }
+
+            .apps-container {
+                padding: 18px;
+            }
+
+            .app-item {
+                flex-direction: row;
+                align-items: center;
+                padding: 12px;
+            }
+
+            .app-info {
+                gap: 12px;
+            }
+
+            .app-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 16px;
+            }
+
+            .app-details h3 {
+                font-size: 1rem;
+            }
+
+            .app-details p {
+                font-size: 0.8rem;
+            }
+
+            .get-now-btn {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+
+            .modal-content, .app-detail-content {
+                padding: 20px;
+            }
+
+            .download-option {
+                padding: 12px;
+            }
+
+            .option-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .option-details h3 {
+                font-size: 1rem;
+            }
+
+            .option-details p {
+                font-size: 0.75rem;
+            }
+
+            .download-btn {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+
+            .modal-footer {
+                gap: 8px;
+            }
+
+            .contact-btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+                min-width: 100px;
+            }
+
+            .app-detail-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .app-detail-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .audio-control, .ai-control {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .ai-control {
+                bottom: 75px;
+            }
+
+            .about-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .social-icons {
+                order: 2;
+            }
+            
+            .theme-toggle {
+                order: 3;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+
+            .app-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .app-info {
+                width: 100%;
+            }
+
+            .get-now-btn {
+                align-self: flex-end;
+            }
+
+            .download-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .option-info {
+                width: 100%;
+            }
+
+            .download-btn {
+                align-self: flex-end;
+            }
+
+            .about-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div class="welcome-modal active" id="welcomeModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeWelcomeModal">&times;</button>
+            <div class="modal-header">
+                <h2>Welcome to iOS Store! 👋</h2>
+                <p>Your destination for premium iOS applications</p>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for visiting our store. We offer a curated selection of premium iOS apps with enhanced features.</p>
+                <p>Feel free to contact our developer if you have any questions or need assistance.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="https://wa.me/201550425843" class="contact-btn contact-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://t.me/h_moh_za" class="contact-btn contact-telegram" target="_blank">
+                    <i class="fab fa-telegram"></i> Telegram
+                </a>
+                <a href="https://instagram.com/mhamedashrf.0" class="contact-btn contact-instagram" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="about-modal" id="aboutModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeAboutModal">&times;</button>
+            <div class="about-content">
+                <h2>About iOS Store</h2>
+                <p>
+                    iOS Store is your premier destination for getting the best modified and premium applications for iOS. 
+                    We offer a variety of free apps with additional features not available in standard versions. 
+                </p>
+                <p>
+                    We continuously work on updating applications to ensure compatibility with the latest iOS versions and provide the best user experience.
+                </p>
+                <p class="developer">Developer: Mohamed Ashraf</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant Control Button -->
+    <a href="https://m7ashr213-cell.github.io/Ai-iOS-STORE/" class="ai-control" id="aiControl" target="_blank">
+        <img src="https://inoxoft.com/wp-content/uploads/2024/05/Cover-12.jpg" alt="AI Assistant">
+    </a>
+
+    <!-- Audio Control Button -->
+    <button class="audio-control" id="audioControl">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <!-- Download Modal -->
+    <div class="download-modal" id="downloadModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeDownloadModal">&times;</button>
+            <div class="modal-header">
+                <h2 id="modalAppTitle">Download App</h2>
+                <p id="modalAppDescription">Choose your preferred version</p>
+            </div>
+            <div class="download-options" id="downloadOptions">
+                <!-- Options will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- App Detail Modal -->
+    <div class="app-detail-modal" id="appDetailModal">
+        <div class="app-detail-content">
+            <button class="close-modal" id="closeAppDetailModal">&times;</button>
+            <div class="app-detail-header">
+                <div class="app-detail-icon" id="appDetailIcon"></div>
+                <h2 class="app-detail-title" id="appDetailTitle">App Name</h2>
+            </div>
+            <div class="app-detail-description" id="appDetailDescription">
+                App description goes here.
+            </div>
+            <div class="app-features">
+                <h3>Main Features</h3>
+                <ul id="appFeaturesList">
+                    <!-- Features will be dynamically inserted here -->
+                </ul>
+            </div>
+            <div class="app-detail-footer">
+                <a href="#" class="app-detail-btn" id="appDetailDownloadLink" target="_blank">Get Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="logo-text">iOS Store</div>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://wa.me/201550425843" class="social-icon whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://instagram.com/mhamedashrf.0" class="social-icon instagram" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/h_moh_za" class="social-icon telegram" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Welcome to iOS Store</h1>
+            <p>Discover premium and modified applications for iOS. All apps are free and regularly updated.</p>
+        </section>
+
+        <section class="apps-container">
+            <h2 class="apps-title">Available Applications</h2>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="appSearch" placeholder="Search for apps...">
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="apps-list" id="appsList">
+                <!-- App 1 - WhatsApp -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon whatsapp-icon">
+                            <img src="https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png" alt="WhatsApp">
+                        </div>
+                        <div class="app-details">
+                            <h3>WhatsApp</h3>
+                            <p>Enhanced messaging with additional features</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="whatsapp">Get Now</button>
+                </div>
+
+                <!-- App 2 - Instagram -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon instagram-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP.tcX3B8AAflIboARGnRMnBgHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Instagram">
+                        </div>
+                        <div class="app-details">
+                            <h3>Instagram</h3>
+                            <p>Share moments with enhanced features</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="instagram">Get Now</button>
+                </div>
+
+                <!-- App 3 - Telegram -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon telegram-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="Telegram">
+                        </div>
+                        <div class="app-details">
+                            <h3>Telegram</h3>
+                            <p>Fast and secure messaging with advanced features</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="telegram">Get Now</button>
+                </div>
+
+                <!-- App 4 - TikTok -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon tiktok-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP._PaaQguBm6xX0R6zsFfGxQHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="TikTok">
+                        </div>
+                        <div class="app-details">
+                            <h3>TikTok</h3>
+                            <p>Create and discover short videos with enhanced editing</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="tiktok">Get Now</button>
+                </div>
+
+                <!-- App 5 - CapCut -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon capcut-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP.hGHL79jkVr4vZ5QZFejI9QHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="CapCut">
+                        </div>
+                        <div class="app-details">
+                            <h3>CapCut</h3>
+                            <p>Professional video editing with premium features unlocked</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="capcut">Get Now</button>
+                </div>
+
+                <!-- App 6 - InShot -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon inshot-icon">
+                            <img src="https://th.bing.com/th/id/R.ecd4c9624cda1329eafc236f84d07f74?rik=oEi7dUiSbfGoWw&pid=ImgRaw&r=0" alt="InShot">
+                        </div>
+                        <div class="app-details">
+                            <h3>InShot</h3>
+                            <p>Professional video editing with no watermark</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="inshot">Get Now</button>
+                </div>
+
+                <!-- App 7 - Picsart -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon picsart-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP.T-SCn3GpqvjImMb-1DxDxwHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Picsart">
+                        </div>
+                        <div class="app-details">
+                            <h3>Picsart</h3>
+                            <p>Comprehensive photo editing with all features unlocked</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="picsart">Get Now</button>
+                </div>
+
+                <!-- App 8 - YouTube -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon youtube-icon">
+                            <img src="https://1.bp.blogspot.com/-hY5-pNrOcKw/XeI_00cpCgI/AAAAAAAAF4A/J7jS49V8kNozycy0PgY6wfc7SUU9gulTgCLcBGAsYHQ/s1600/Youtube-Icon-square-2340x2340.png" alt="YouTube">
+                        </div>
+                        <div class="app-details">
+                            <h3>YouTube Premium</h3>
+                            <p>Ad-free videos, background play, and downloads</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="youtube">Get Now</button>
+                </div>
+
+                <!-- App 9 - Spotify -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon spotify-icon">
+                            <img src="https://clipartcraft.com/images/spotify-logo-transparent-app.png" alt="Spotify">
+                        </div>
+                        <div class="app-details">
+                            <h3>Spotify Premium</h3>
+                            <p>Ad-free music, unlimited skips, and offline downloads</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="spotify">Get Now</button>
+                </div>
+
+                <!-- App 10 - This PC -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon thispc-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP.1Yn781JF4tspKbsRPAsVRwHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="This PC">
+                        </div>
+                        <div class="app-details">
+                            <h3>This PC</h3>
+                            <p>Transform your iPhone into a computer experience</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="thispc">Get Now</button>
+                </div>
+
+                <!-- App 11 - Study Apps -->
+<div class="app-item">
+    <div class="app-info">
+        <div class="app-icon studyapps-icon">
+            <img src="https://clipartcraft.com/images/study-clipart-1.png" alt="Study Apps">
+        </div>
+        <div class="app-details">
+            <h3>Study Apps</h3>
+            <p>Educational apps for secondary school students</p>
+        </div>
+    </div>
+    <button class="get-now-btn" data-app="studyapps">Get Now</button>
+</div>
+                <!-- App 12 - Cinema Tv Apps -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon watchapps-icon">
+                            <img src="https://media.istockphoto.com/vectors/cinema-and-movie-design-vector-id670307858?k=20&m=670307858&s=612x612&w=0&h=Jy1L6OuTgllqt66NbtzIx2Q0AW_U8k1u1CrrygQUOps=" alt="Cinema Tv Apps">
+                        </div>
+                        <div class="app-details">
+                            <h3>Cinema Tv Apps</h3>
+                            <p>Movie and series streaming apps with premium activated</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="watchapps">Get Now</button>
+                </div>
+
+                <!-- App 13 - iOS Apps -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon iosapps-icon">
+                            <img src="https://thvnext.bing.com/th/id/OIP.Liy9wv46y0WP3_2ZJpTO2AHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="iOS Apps">
+                        </div>
+                        <div class="app-details">
+                            <h3>iOS Apps</h3>
+                            <p>Collection of iOS applications and utilities</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="iosapps">Get Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Button -->
+        <div class="about-button-container">
+            <button class="about-btn" id="aboutBtn">
+                <i class="fas fa-info-circle"></i> About iOS Store
+            </button>
+        </div>
+
+        <footer>
+            <p>© Mohamed Ashraf . All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // App download data
+        const appData = {
+            whatsapp: {
+                title: "Download WhatsApp",
+                description: "Choose your preferred version",
+                options: [
+                    {
+                        name: "MB WhatsApp",
+                        description: "Enhanced messaging with additional features",
+                        icon: "whatsapp-icon",
+                        iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
+                        link: "https://m7ashr213-cell.github.io/iOS-Store-MB-WhatsApp/"
+                    },
+                    {
+                        name: "iOS WhatsApp",
+                        description: "Official WhatsApp with iOS optimizations",
+                        icon: "whatsapp-icon",
+                        iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
+                        link: "https://m7ashr213-cell.github.io/iOS-Store-WhatsApp/"
+                    }
+                ]
+            },
+            // App Detail Data
+            instagram: {
+                title: "Instagram",
+                description: "Enhanced version of Instagram with additional features not available in the standard version",
+                features: [
+                    "Download photos and videos in high quality",
+                    "Ad-free browsing experience",
+                    "Anonymous story viewing",
+                    "Improved and customized user interface"
+                ],
+                iconClass: "fab fa-instagram",
+                iconColor: "instagram-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP.tcX3B8AAflIboARGnRMnBgHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-iOS-Instagram-Web/"
+            },
+            telegram: {
+                title: "Telegram",
+                description: "Fast and secure instant messaging app with advanced features",
+                features: [
+                    "Self-destructing secret messages",
+                    "High-quality voice and video calls",
+                    "Support for large groups up to 200,000 members",
+                    "Instant synchronization across all devices"
+                ],
+                iconClass: "fab fa-telegram",
+                iconColor: "telegram-icon",
+                iconImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-iOS-Telegram-/"
+            },
+            tiktok: {
+                title: "TikTok",
+                description: "Leading short video platform with exclusive enhancements",
+                features: [
+                    "Download videos without watermark",
+                    "Watch videos without interruptions",
+                    "Access to all effects for free",
+                    "Improved and fast user interface"
+                ],
+                iconClass: "fab fa-tiktok",
+                iconColor: "tiktok-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP._PaaQguBm6xX0R6zsFfGxQHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-iOS-TikTok-Web/"
+            },
+            capcut: {
+                title: "CapCut",
+                description: "Professional video editing app with all premium features unlocked",
+                features: [
+                    "All effects and filters available for free",
+                    "Automatic watermark removal",
+                    "Support for 4K video export",
+                    "Comprehensive background music library without restrictions"
+                ],
+                iconClass: "fas fa-scissors",
+                iconColor: "capcut-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP.hGHL79jkVr4vZ5QZFejI9QHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/CupCut-Pro/"
+            },
+            inshot: {
+                title: "InShot",
+                description: "Advanced video editing app with watermark removal",
+                features: [
+                    "Video editing without watermark",
+                    "All stickers and filters available",
+                    "Add music and advanced sound effects",
+                    "High resolution export with fast processing"
+                ],
+                iconClass: "fas fa-film",
+                iconColor: "inshot-icon",
+                iconImage: "https://th.bing.com/th/id/R.ecd4c9624cda1329eafc236f84d07f74?rik=oEi7dUiSbfGoWw&pid=ImgRaw&r=0",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-InShot-Pro/"
+            },
+            picsart: {
+                title: "Picsart",
+                description: "Comprehensive photo editing app with all premium features unlocked",
+                features: [
+                    "All editing tools and filters available",
+                    "Unlimited stickers and graphics library",
+                    "Background removal and smart backgrounds",
+                    "High resolution export without watermark"
+                ],
+                iconClass: "fas fa-paint-brush",
+                iconColor: "picsart-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP.T-SCn3GpqvjImMb-1DxDxwHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-Picsart-Pro/"
+            },
+            youtube: {
+                title: "YouTube Premium",
+                description: "Enjoy YouTube without ads with additional features",
+                features: [
+                    "Watch videos without ad interruptions",
+                    "Background video playback",
+                    "Download videos for offline viewing",
+                    "Support for video quality up to 4K"
+                ],
+                iconClass: "fab fa-youtube",
+                iconColor: "youtube-icon",
+                iconImage: "https://1.bp.blogspot.com/-hY5-pNrOcKw/XeI_00cpCgI/AAAAAAAAF4A/J7jS49V8kNozycy0PgY6wfc7SUU9gulTgCLcBGAsYHQ/s1600/Youtube-Icon-square-2340x2340.png",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-YouTube-Premioum/"
+            },
+            spotify: {
+                title: "Spotify Premium",
+                description: "Listen to music without ads with advanced features",
+                features: [
+                    "Listen to music without ads",
+                    "Unlimited song skipping",
+                    "Download songs for offline listening",
+                    "High sound quality and advanced control features"
+                ],
+                iconClass: "fab fa-spotify",
+                iconColor: "spotify-icon",
+                iconImage: "https://clipartcraft.com/images/spotify-logo-transparent-app.png",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-Spotify/"
+            },
+            thispc: {
+                title: "This PC",
+                description: "Transform your phone into a computer experience with Windows-like interface",
+                features: [
+                    "Windows-like user interface",
+                    "Easy file and folder management",
+                    "Run applications in computer mode",
+                    "Professional and advanced user experience"
+                ],
+                iconClass: "fas fa-laptop",
+                iconColor: "thispc-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP.1Yn781JF4tspKbsRPAsVRwHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-This-PC/"
+            },
+            studyapps: {
+    title: "Study Apps",
+    description: "Comprehensive educational applications for secondary school students",
+    features: [
+        "Comprehensive curriculum for secondary education",
+        "Interactive lessons and exercises",
+        "Exam preparation materials",
+        "Progress tracking and performance analytics"
+    ],
+    iconClass: "fas fa-graduation-cap",
+    iconColor: "studyapps-icon",
+    iconImage: "https://clipartcraft.com/images/study-clipart-1.png",
+    link: "https://m7ashr213-cell.github.io/Study-Apps/"
+
+            },
+            watchapps: {
+                title: "Cinema Tv Apps",
+                description: "Movie and series streaming apps with premium activated",
+                features: [
+                    "Watch movies and series without ads",
+                    "Support for anime content in high quality",
+                    "All premium features activated for free",
+                    "Improved and easy-to-use user interface"
+                ],
+                iconClass: "fas fa-film",
+                iconColor: "watchapps-icon",
+                iconImage: "https://media.istockphoto.com/vectors/cinema-and-movie-design-vector-id670307858?k=20&m=670307858&s=612x612&w=0&h=Jy1L6OuTgllqt66NbtzIx2Q0AW_U8k1u1CrrygQUOps=",
+                link: "https://m7ashr213-cell.github.io/Watch-Apps/"
+            },
+            iosapps: {
+                title: "iOS Apps",
+                description: "Comprehensive collection of iOS applications and utilities",
+                features: [
+                    "Variety of premium applications",
+                    "Continuous app updates",
+                    "Simple and easy-to-use interface",
+                    "Full support for the latest iOS versions"
+                ],
+                iconClass: "fas fa-mobile-alt",
+                iconColor: "iosapps-icon",
+                iconImage: "https://thvnext.bing.com/th/id/OIP.Liy9wv46y0WP3_2ZJpTO2AHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "https://m7ashr213-cell.github.io/iOS-Store-iOS-Apps/"
+            }
+        };
+
+        // NEW ANIMATION FUNCTIONS
+        // Animation functions
+        function animateOnScroll() {
+            const appItems = document.querySelectorAll('.app-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add delay based on index for staggered animation
+                        const index = Array.from(appItems).indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('animate');
+                        }, index * 100);
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            appItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // Button loading animation
+        function addButtonLoading(button) {
+            button.classList.add('loading');
+            setTimeout(() => {
+                button.classList.remove('loading');
+            }, 1500);
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate app items on scroll
+            animateOnScroll();
+            
+            // Add loading animation to buttons
+            const buttons = document.querySelectorAll('.get-now-btn, .download-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    addButtonLoading(this);
+                });
+            });
+            
+            // Animate header on load
+            const header = document.querySelector('header');
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                header.style.transition = 'all 0.6s ease-out';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Animate hero section
+            const hero = document.querySelector('.hero');
+            hero.style.opacity = '0';
+            hero.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                hero.style.transition = 'all 0.8s ease-out';
+                hero.style.opacity = '1';
+                hero.style.transform = 'translateY(0)';
+            }, 500);
+        });
+
+        // Enhanced modal animations
+        function enhanceModalAnimations() {
+            const modals = document.querySelectorAll('.download-modal, .app-detail-modal, .welcome-modal, .about-modal');
+            
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Call the function
+        enhanceModalAnimations();
+
+        // Search animation
+        const searchInput = document.getElementById('appSearch');
+        searchInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+
+        searchInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+
+        // Theme toggle animation
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', function() {
+            this.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                this.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+
+        // Social icons hover effects
+        const socialIcons = document.querySelectorAll('.social-icon');
+        socialIcons.forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.1)';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // About Button Functionality
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeAboutModal = document.getElementById('closeAboutModal');
+
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.classList.add('active');
+        });
+
+        closeAboutModal.addEventListener('click', () => {
+            aboutModal.classList.remove('active');
+        });
+
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('active');
+            }
+        });
+
+        // EXISTING FUNCTIONALITY
+        // Search Functionality
+        const appSearch = document.getElementById('appSearch');
+        const appsList = document.getElementById('appsList');
+        const appItems = appsList.querySelectorAll('.app-item');
+
+        appSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            appItems.forEach(item => {
+                const appName = item.querySelector('h3').textContent.toLowerCase();
+                const appDescription = item.querySelector('p').textContent.toLowerCase();
+                
+                if (appName.includes(searchTerm) || appDescription.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Audio Control
+        const audioControl = document.getElementById('audioControl');
+        let isAudioEnabled = true;
+
+        // Text to Speech Function
+        function playWelcomeMessage() {
+            if (!isAudioEnabled) return;
+            
+            if ('speechSynthesis' in window) {
+                // Stop any previous message
+                window.speechSynthesis.cancel();
+                
+                const message = new SpeechSynthesisUtterance();
+                message.text = "Welcome to the iOS applications store. Here you will find the best modified applications ever. To contact the developer for more details, click on the WhatsApp icon. Goodbye and stay safe.";
+                message.lang = 'en-US';
+                message.rate = 0.9; // Speech speed
+                message.pitch = 1; // Voice pitch
+                message.volume = 1; // Volume level
+                
+                // Try to use a female voice if available
+                const voices = speechSynthesis.getVoices();
+                const femaleVoice = voices.find(voice => 
+                    voice.name.includes('Female') || 
+                    voice.name.includes('Samantha') ||
+                    voice.name.includes('Karen') ||
+                    voice.name.includes('Victoria')
+                );
+                
+                if (femaleVoice) {
+                    message.voice = femaleVoice;
+                }
+                
+                window.speechSynthesis.speak(message);
+            }
+        }
+
+        // Audio Control Toggle
+        audioControl.addEventListener('click', function() {
+            isAudioEnabled = !isAudioEnabled;
+            
+            if (isAudioEnabled) {
+                audioControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                audioControl.classList.remove('muted');
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+            } else {
+                audioControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                audioControl.classList.add('muted');
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+            }
+        });
+
+        // Theme Toggle
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // Welcome Modal
+        const welcomeModal = document.getElementById('welcomeModal');
+        const closeWelcomeModal = document.getElementById('closeWelcomeModal');
+        
+        // Close modal when X is clicked
+        closeWelcomeModal.addEventListener('click', () => {
+            welcomeModal.classList.remove('active');
+            // Play audio message after closing the modal
+            setTimeout(playWelcomeMessage, 500);
+        });
+        
+        // Close modal when clicking outside content
+        welcomeModal.addEventListener('click', (e) => {
+            if (e.target === welcomeModal) {
+                welcomeModal.classList.remove('active');
+                // Play audio message after closing the modal
+                setTimeout(playWelcomeMessage, 500);
+            }
+        });
+
+        // Download Modal (for WhatsApp only)
+        const downloadModal = document.getElementById('downloadModal');
+        const closeDownloadModal = document.getElementById('closeDownloadModal');
+        const modalAppTitle = document.getElementById('modalAppTitle');
+        const modalAppDescription = document.getElementById('modalAppDescription');
+        const downloadOptions = document.getElementById('downloadOptions');
+        const whatsappButton = document.querySelector('[data-app="whatsapp"]');
+        
+        // Open modal when WhatsApp Get Now is clicked
+        if (whatsappButton) {
+            whatsappButton.addEventListener('click', () => {
+                const app = appData.whatsapp;
+                
+                if (app) {
+                    modalAppTitle.textContent = app.title;
+                    modalAppDescription.textContent = app.description;
+                    
+                    // Clear previous options
+                    downloadOptions.innerHTML = '';
+                    
+                    // Add new options
+                    app.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'download-option';
+                        optionElement.innerHTML = `
+                            <div class="option-info">
+                                <div class="option-icon ${option.icon}">
+                                    <img src="${option.iconImage}" alt="${option.name}">
+                                </div>
+                                <div class="option-details">
+                                    <h3>${option.name}</h3>
+                                    <p>${option.description}</p>
+                                </div>
+                            </div>
+                            <a href="${option.link}" class="download-btn" target="_blank">Get Now</a>
+                        `;
+                        downloadOptions.appendChild(optionElement);
+                    });
+                    
+                    downloadModal.classList.add('active');
+                }
+            });
+        }
+        
+        // Close modal when X is clicked
+        closeDownloadModal.addEventListener('click', () => {
+            downloadModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside content
+        downloadModal.addEventListener('click', (e) => {
+            if (e.target === downloadModal) {
+                downloadModal.classList.remove('active');
+            }
+        });
+
+        // App Detail Modal
+        const appDetailModal = document.getElementById('appDetailModal');
+        const closeAppDetailModal = document.getElementById('closeAppDetailModal');
+        const appDetailTitle = document.getElementById('appDetailTitle');
+        const appDetailDescription = document.getElementById('appDetailDescription');
+        const appDetailIcon = document.getElementById('appDetailIcon');
+        const appFeaturesList = document.getElementById('appFeaturesList');
+        const appDetailDownloadLink = document.getElementById('appDetailDownloadLink');
+        
+        // Get all app buttons except WhatsApp
+        const appButtons = document.querySelectorAll('.get-now-btn[data-app]:not([data-app="whatsapp"])');
+        
+        // Add event listeners to app buttons
+        appButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const appId = button.getAttribute('data-app');
+                const app = appData[appId];
+                
+                if (app) {
+                    appDetailTitle.textContent = app.title;
+                    appDetailDescription.textContent = app.description;
+                    appDetailIcon.className = `app-detail-icon ${app.iconColor}`;
+                    appDetailIcon.innerHTML = `<img src="${app.iconImage}" alt="${app.title}">`;
+                    appDetailDownloadLink.href = app.link;
+                    
+                    // Clear previous features
+                    appFeaturesList.innerHTML = '';
+                    
+                    // Add new features
+                    app.features.forEach(feature => {
+                        const featureElement = document.createElement('li');
+                        featureElement.textContent = feature;
+                        appFeaturesList.appendChild(featureElement);
+                    });
+                    
+                    appDetailModal.classList.add('active');
+                }
+            });
+        });
+        
+        // Close modal when X is clicked
+        closeAppDetailModal.addEventListener('click', () => {
+            appDetailModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside content
+        appDetailModal.addEventListener('click', (e) => {
+            if (e.target === appDetailModal) {
+                appDetailModal.classList.remove('active');
+            }
+        });
+
+        // Initialize voices when page loads
+        window.addEventListener('load', function() {
+            // Wait for voices to load
+            setTimeout(() => {
+                speechSynthesis.getVoices();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
