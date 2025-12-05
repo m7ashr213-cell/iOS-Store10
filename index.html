@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iOS Store -By Mohamed Ashraf</title>
+    <title>iOS Store - Premium Apps - By Mohamed Ashraf</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -528,6 +528,120 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
+        /* Developer Modal */
+        .developer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .developer-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .developer-modal .modal-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .developer-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .developer-content {
+            text-align: center;
+        }
+
+        .developer-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid var(--primary-color);
+        }
+
+        .developer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .developer-content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .developer-info {
+            text-align: left;
+            background-color: var(--background-color);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .developer-info p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .developer-info strong {
+            color: var(--primary-color);
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        .developer-contact-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .developer-contact-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
         /* Apps Section */
         .apps-container {
             background-color: var(--card-color);
@@ -699,115 +813,6 @@
             font-size: 0.85rem;
         }
 
-        /* Welcome Modal */
-        .welcome-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .welcome-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .welcome-modal .modal-content {
-            background-color: var(--card-color);
-            border-radius: 20px;
-            padding: 25px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .welcome-modal.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .modal-header h2 {
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            font-size: 1.4rem;
-        }
-
-        .modal-header p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .modal-body {
-            margin-bottom: 20px;
-        }
-
-        .modal-body p {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            opacity: 0.8;
-            line-height: 1.5;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 16px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            flex: 1;
-            justify-content: center;
-            min-width: 110px;
-        }
-
-        .contact-whatsapp {
-            background-color: #25D366;
-            color: white;
-        }
-
-        .contact-telegram {
-            background-color: #0088CC;
-            color: white;
-        }
-
-        .contact-instagram {
-            background-color: #E4405F;
-            color: white;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
         /* About Modal */
         .about-modal {
             position: fixed;
@@ -876,35 +881,6 @@
             font-size: 0.95rem;
         }
 
-        /* Audio Control */
-        .audio-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        .audio-control:hover {
-            transform: scale(1.1);
-            background: var(--secondary-color);
-        }
-
-        .audio-control.muted {
-            background: #ff4757;
-        }
-
         /* AI Assistant Control */
         .ai-control {
             position: fixed;
@@ -938,6 +914,39 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
+        /* Developer Control */
+        .developer-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .developer-control img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .developer-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
         /* NEW ANIMATIONS */
         /* Animations for app items */
         .app-item {
@@ -960,7 +969,7 @@
 
         .download-modal.active .modal-content,
         .app-detail-modal.active .app-detail-content,
-        .welcome-modal.active .modal-content,
+        .developer-modal.active .modal-content,
         .about-modal.active .modal-content {
             transform: translateY(0) scale(1);
             opacity: 1;
@@ -1061,8 +1070,8 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Floating animation for audio control */
-        .audio-control, .ai-control {
+        /* Floating animation for controls */
+        .ai-control, .developer-control {
             animation: float 3s ease-in-out infinite;
         }
 
@@ -1110,7 +1119,7 @@
         }
 
         /* Enhanced modal backdrop */
-        .download-modal, .app-detail-modal, .welcome-modal, .about-modal {
+        .download-modal, .app-detail-modal, .developer-modal, .about-modal {
             backdrop-filter: blur(10px);
         }
 
@@ -1242,7 +1251,7 @@
                 font-size: 20px;
             }
 
-            .audio-control, .ai-control {
+            .ai-control, .developer-control {
                 bottom: 15px;
                 right: 15px;
                 width: 45px;
@@ -1256,6 +1265,11 @@
             .about-btn {
                 padding: 12px 24px;
                 font-size: 1rem;
+            }
+            
+            .developer-image {
+                width: 100px;
+                height: 100px;
             }
         }
 
@@ -1313,35 +1327,14 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .developer-control {
+                bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Modal -->
-    <div class="welcome-modal active" id="welcomeModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeWelcomeModal">&times;</button>
-            <div class="modal-header">
-                <h2>Welcome to iOS Store! 👋</h2>
-                <p>Your destination for premium iOS applications</p>
-            </div>
-            <div class="modal-body">
-                <p>Thank you for visiting our store. We offer a curated selection of premium iOS apps with enhanced features.</p>
-                <p>Feel free to contact our developer if you have any questions or need assistance.</p>
-            </div>
-            <div class="modal-footer">
-                <a href="https://wa.me/201550425843" class="contact-btn contact-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="https://t.me/h_moh_za" class="contact-btn contact-telegram" target="_blank">
-                    <i class="fab fa-telegram"></i> Telegram
-                </a>
-                <a href="https://instagram.com/mhamedashrf.0" class="contact-btn contact-instagram" target="_blank">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-            </div>
-        </div>
-    </div>
 
     <!-- About Modal -->
     <div class="about-modal" id="aboutModal">
@@ -1361,14 +1354,35 @@
         </div>
     </div>
 
+    <!-- Developer Modal -->
+    <div class="developer-modal" id="developerModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeDeveloperModal">&times;</button>
+            <div class="developer-content">
+                <div class="developer-image">
+                    <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-1/593569574_1426911925528181_4549535464368828512_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=kQNuexglKR4Q7kNvwFAHBEN&_nc_oc=Adn9F3AG99bVF-0AYcRUCUC3IuvYVaAoZ8pYQfivcV7ZdxRljXtqZOn0vfG7j5X_K80&_nc_zt=24&_nc_ht=scontent-hbe1-1.xx&_nc_gid=47ytpQIpS1Ysf_EMF0oXQA&oh=00_AfnT5hEipciExfQU05mqxEWV0v0Dlrv0ucSstarfp5Uqeg&oe=6938EFAD" alt="Mohamed Ashraf">
+                </div>
+                <h2>Mohamed Ashraf</h2>
+                <div class="developer-info">
+                    <p><strong>Name:</strong> Mohamed Ashraf</p>
+                    <p><strong>Age:</strong> 18</p>
+                    <p><strong>Profession:</strong> Web Developer</p>
+                </div>
+                <a href="https://wa.me/201550425843" class="developer-contact-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact Me
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- AI Assistant Control Button -->
     <a href="https://m7ashr213-cell.github.io/Ai-iOS-STORE/" class="ai-control" id="aiControl" target="_blank">
         <img src="https://inoxoft.com/wp-content/uploads/2024/05/Cover-12.jpg" alt="AI Assistant">
     </a>
 
-    <!-- Audio Control Button -->
-    <button class="audio-control" id="audioControl">
-        <i class="fas fa-volume-up"></i>
+    <!-- Developer Control Button -->
+    <button class="developer-control" id="developerControl">
+        <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-1/593569574_1426911925528181_4549535464368828512_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=kQNuexglKR4Q7kNvwFAHBEN&_nc_oc=Adn9F3AG99bVF-0AYcRUCUC3IuvYVaAoZ8pYQfivcV7ZdxRljXtqZOn0vfG7j5X_K80&_nc_zt=24&_nc_ht=scontent-hbe1-1.xx&_nc_gid=47ytpQIpS1Ysf_EMF0oXQA&oh=00_AfnT5hEipciExfQU05mqxEWV0v0Dlrv0ucSstarfp5Uqeg&oe=6938EFAD" alt="Developer">
     </button>
 
     <!-- Download Modal -->
@@ -1914,11 +1928,14 @@
                 hero.style.opacity = '1';
                 hero.style.transform = 'translateY(0)';
             }, 500);
+            
+            // Play audio message on page load
+            setTimeout(playWelcomeMessage, 1000);
         });
 
         // Enhanced modal animations
         function enhanceModalAnimations() {
-            const modals = document.querySelectorAll('.download-modal, .app-detail-modal, .welcome-modal, .about-modal');
+            const modals = document.querySelectorAll('.download-modal, .app-detail-modal, .developer-modal, .about-modal');
             
             modals.forEach(modal => {
                 modal.addEventListener('click', function(e) {
@@ -1963,6 +1980,25 @@
             });
         });
 
+        // Developer Modal Functionality
+        const developerControl = document.getElementById('developerControl');
+        const developerModal = document.getElementById('developerModal');
+        const closeDeveloperModal = document.getElementById('closeDeveloperModal');
+
+        developerControl.addEventListener('click', () => {
+            developerModal.classList.add('active');
+        });
+
+        closeDeveloperModal.addEventListener('click', () => {
+            developerModal.classList.remove('active');
+        });
+
+        developerModal.addEventListener('click', (e) => {
+            if (e.target === developerModal) {
+                developerModal.classList.remove('active');
+            }
+        });
+
         // About Button Functionality
         const aboutBtn = document.getElementById('aboutBtn');
         const aboutModal = document.getElementById('aboutModal');
@@ -2003,14 +2039,8 @@
             });
         });
 
-        // Audio Control
-        const audioControl = document.getElementById('audioControl');
-        let isAudioEnabled = true;
-
         // Text to Speech Function
         function playWelcomeMessage() {
-            if (!isAudioEnabled) return;
-            
             if ('speechSynthesis' in window) {
                 // Stop any previous message
                 window.speechSynthesis.cancel();
@@ -2039,23 +2069,6 @@
             }
         }
 
-        // Audio Control Toggle
-        audioControl.addEventListener('click', function() {
-            isAudioEnabled = !isAudioEnabled;
-            
-            if (isAudioEnabled) {
-                audioControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                audioControl.classList.remove('muted');
-                // Stop any current speech
-                window.speechSynthesis.cancel();
-            } else {
-                audioControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                audioControl.classList.add('muted');
-                // Stop any current speech
-                window.speechSynthesis.cancel();
-            }
-        });
-
         // Theme Toggle
         const body = document.body;
         
@@ -2066,26 +2079,6 @@
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             } else {
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        });
-
-        // Welcome Modal
-        const welcomeModal = document.getElementById('welcomeModal');
-        const closeWelcomeModal = document.getElementById('closeWelcomeModal');
-        
-        // Close modal when X is clicked
-        closeWelcomeModal.addEventListener('click', () => {
-            welcomeModal.classList.remove('active');
-            // Play audio message after closing the modal
-            setTimeout(playWelcomeMessage, 500);
-        });
-        
-        // Close modal when clicking outside content
-        welcomeModal.addEventListener('click', (e) => {
-            if (e.target === welcomeModal) {
-                welcomeModal.classList.remove('active');
-                // Play audio message after closing the modal
-                setTimeout(playWelcomeMessage, 500);
             }
         });
 
