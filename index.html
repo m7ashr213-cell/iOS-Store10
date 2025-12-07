@@ -27,6 +27,138 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
+        /* Welcome Modal Styles */
+        .welcome-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.3s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .welcome-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .welcome-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            text-align: center;
+            animation: welcomeSlideIn 0.5s ease-out;
+        }
+
+        @keyframes welcomeSlideIn {
+            from {
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-image-container {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+        }
+
+        .welcome-image-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--card-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-image-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .welcome-text {
+            margin-top: 70px;
+            margin-bottom: 25px;
+        }
+
+        .welcome-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .welcome-text p {
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .welcome-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .welcome-btn {
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            min-width: 100px;
+        }
+
+        .welcome-btn.no {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .welcome-btn.yes {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-btn.no:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* بقية الأنماط تبقى كما هي */
         * {
             margin: 0;
             padding: 0;
@@ -1271,6 +1403,34 @@
                 width: 100px;
                 height: 100px;
             }
+            
+            /* Welcome Modal Responsive */
+            .welcome-content {
+                padding: 25px 20px;
+            }
+            
+            .welcome-image-container {
+                width: 100px;
+                height: 100px;
+                top: -50px;
+            }
+            
+            .welcome-text {
+                margin-top: 60px;
+            }
+            
+            .welcome-text h2 {
+                font-size: 1.3rem;
+            }
+            
+            .welcome-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .welcome-btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1335,6 +1495,27 @@
     </style>
 </head>
 <body>
+
+    <!-- Welcome Modal -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="welcome-content">
+            <div class="welcome-image-container">
+                <div class="welcome-image-circle">
+                    <img src="https://scontent-hbe1-2.xx.fbcdn.net/v/t39.30808-6/594977648_1427437498808957_8464718621588885698_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=-PwMxPaxviQQ7kNvwHIY4nw&_nc_oc=AdkPEJwgPqyRlRMMXFBSBWOsjyJcr4ctrQQAoAD0R0D-PdV_9i9_lnZ1Ph6OGAYo91Q&_nc_zt=23&_nc_ht=scontent-hbe1-2.xx&_nc_gid=6FoLeEZrNdTEX4EOUJLwKQ&oh=00_AfkQrrx7-gQ6JO27Y5S5oSF7Pz57uZAyVvs1AMm2s7YXcQ&oe=693BEBB2" alt="Mohamed Ashraf">
+                </div>
+            </div>
+            
+            <div class="welcome-text">
+                <h2>Do you want to create your own website?</h2>
+                <p>Chat with developer and watch the demos</p>
+            </div>
+            
+            <div class="welcome-buttons">
+                <button class="welcome-btn no" id="welcomeNo">NO</button>
+                <button class="welcome-btn yes" id="welcomeYes">Okay</button>
+            </div>
+        </div>
+    </div>
 
     <!-- About Modal -->
     <div class="about-modal" id="aboutModal">
@@ -1665,6 +1846,46 @@
     </div>
 
     <script>
+        // Welcome Modal Functionality
+        const welcomeModal = document.getElementById('welcomeModal');
+        const welcomeNoBtn = document.getElementById('welcomeNo');
+        const welcomeYesBtn = document.getElementById('welcomeYes');
+
+        // Show welcome modal on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has already dismissed the modal in this session
+            const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+            
+            if (!hasSeenWelcome) {
+                // Show welcome modal after a short delay
+                setTimeout(() => {
+                    welcomeModal.classList.remove('hidden');
+                }, 500);
+            }
+        });
+
+        // Handle NO button click
+        welcomeNoBtn.addEventListener('click', function() {
+            welcomeModal.classList.add('hidden');
+            sessionStorage.setItem('hasSeenWelcome', 'true');
+        });
+
+        // Handle YES/Okay button click
+        welcomeYesBtn.addEventListener('click', function() {
+            // Redirect to developer's website
+            window.open('https://m7ashr213-cell.github.io/Mohamed-Ashraf/', '_blank');
+            welcomeModal.classList.add('hidden');
+            sessionStorage.setItem('hasSeenWelcome', 'true');
+        });
+
+        // Close modal when clicking outside content
+        welcomeModal.addEventListener('click', function(e) {
+            if (e.target === welcomeModal) {
+                welcomeModal.classList.add('hidden');
+                sessionStorage.setItem('hasSeenWelcome', 'true');
+            }
+        });
+
         // App download data
         const appData = {
             whatsapp: {
@@ -1929,8 +2150,12 @@
                 hero.style.transform = 'translateY(0)';
             }, 500);
             
-            // Play audio message on page load
-            setTimeout(playWelcomeMessage, 1000);
+            // Play audio message on page load (only if welcome modal is not shown)
+            setTimeout(() => {
+                if (!sessionStorage.getItem('hasSeenWelcome')) {
+                    playWelcomeMessage();
+                }
+            }, 1000);
         });
 
         // Enhanced modal animations
