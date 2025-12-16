@@ -275,11 +275,30 @@
             background-color: rgba(255,255,255,0.1);
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED */
         .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 25px 0;
             text-align: center;
             margin-bottom: 25px;
+        }
+
+        .hero-image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .hero h1 {
@@ -1301,6 +1320,11 @@
                 padding: 0 10px;
             }
 
+            .hero-image-container {
+                width: 130px;
+                height: 130px;
+            }
+
             .apps-container {
                 padding: 18px;
             }
@@ -1491,6 +1515,20 @@
             .developer-control {
                 bottom: 20px;
             }
+
+            .hero-image-container {
+                width: 110px;
+                height: 110px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
         }
     </style>
 </head>
@@ -1631,10 +1669,12 @@
             </div>
         </header>
 
+        <!-- UPDATED HERO SECTION -->
         <section class="hero">
+            <div class="hero-image-container">
+                <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/599725445_122164053176762399_482645113107095838_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=7OKucY72VzUQ7kNvwFYjmu8&_nc_oc=Adn5eJ8lAhaBvPnJLkxdr58rDgp3nixu-jxeTdOoxRc8Bg7w-n98o5QyTtlzILs7kTM&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=mCct-pBgyen1Ts9lkid_rQ&oh=00_Afle5-k6l3p_bJhruFl1V_SHkP80XncaIrgZsb994faqTg&oe=69472E9D" alt="iOS Store">
+            </div>
             <h1>Welcome to iOS Store</h1>
-            <p>Discover premium and modified applications for iOS. All apps are free and regularly updated.</p>
-        </section>
 
         <section class="apps-container">
             <h2 class="apps-title">Available Applications</h2>
