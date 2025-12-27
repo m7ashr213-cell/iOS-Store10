@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,142 @@
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Welcome Modal Styles */
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.5s ease;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 4px solid var(--primary-color);
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .splash-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .splash-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .splash-subtext {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        /* Update Notification */
+        .update-notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .update-notification.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .update-content {
+            background-color: var(--card-color);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: welcomeSlideIn 0.5s ease-out;
+        }
+
+        .update-apps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .update-app {
+            text-align: center;
+            width: 120px;
+        }
+
+        .update-app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 0 auto 10px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .update-app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .update-app-title {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .update-message {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Welcome Modal (for developer image) */
         .welcome-modal {
             position: fixed;
             top: 0;
@@ -39,16 +174,16 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            opacity: 1;
-            visibility: visible;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
             padding: 20px;
             backdrop-filter: blur(10px);
         }
 
-        .welcome-modal.hidden {
-            opacity: 0;
-            visibility: hidden;
+        .welcome-modal.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         .welcome-content {
@@ -158,12 +293,12 @@
             background-color: rgba(255,255,255,0.1);
         }
 
-        /* بقية الأنماط تبقى كما هي */
+        /* بقية الأنماط تبقى كما هي مع تعديلات للغة العربية */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Tahoma', sans-serif;
         }
 
         body {
@@ -479,11 +614,13 @@
             overflow: hidden;
         }
         .watchapps-icon { background: linear-gradient(135deg, #000000, #FF0000); }
-        .duolingo-icon { 
-            background: linear-gradient(135deg, #000000, #58CC02); 
+        .studyapps-icon { 
+            background: linear-gradient(135deg, #4A90E2, #2E5B9E); 
             position: relative;
             overflow: hidden;
         }
+        .shareit-icon { background: linear-gradient(135deg, #00B0FF, #0091EA); }
+        .larkplayer-icon { background: linear-gradient(135deg, #FF6B35, #FFA500); }
 
         .option-details h3 {
             font-size: 1.1rem;
@@ -632,7 +769,7 @@
 
         .app-features ul {
             list-style-type: none;
-            padding-left: 0;
+            padding-right: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -640,15 +777,15 @@
 
         .app-features li {
             margin-bottom: 8px;
-            padding-left: 20px;
+            padding-right: 20px;
             position: relative;
-            text-align: center;
+            text-align: right;
         }
 
         .app-features li:before {
             content: "✓";
             position: absolute;
-            left: 0;
+            right: 0;
             color: var(--accent-color);
             font-weight: bold;
         }
@@ -748,7 +885,7 @@
         }
 
         .developer-info {
-            text-align: left;
+            text-align: right;
             background-color: var(--background-color);
             padding: 15px;
             border-radius: 12px;
@@ -793,13 +930,14 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Apps Section */
+        /* Apps Section - WIDER LAYOUT */
         .apps-container {
             background-color: var(--card-color);
             border-radius: 16px;
             box-shadow: var(--shadow);
             padding: 20px;
             margin-bottom: 25px;
+            width: 100%;
         }
 
         .apps-title {
@@ -825,6 +963,7 @@
             border-radius: 14px;
             transition: var(--transition);
             border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
         }
 
         .app-item:hover {
@@ -864,7 +1003,7 @@
             content: "PRO";
             position: absolute;
             top: -5px;
-            right: -5px;
+            left: -5px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000;
             font-size: 8px;
@@ -891,10 +1030,12 @@
             overflow: hidden;
         }
         .studyapps-icon { 
-    background: linear-gradient(135deg, #4A90E2, #2E5B9E); 
-    position: relative;
-    overflow: hidden;
-}
+            background: linear-gradient(135deg, #4A90E2, #2E5B9E); 
+            position: relative;
+            overflow: hidden;
+        }
+        .shareit-icon { background: linear-gradient(135deg, #00B0FF, #0091EA); }
+        .larkplayer-icon { background: linear-gradient(135deg, #FF6B35, #FFA500); }
 
         .app-details h3 {
             font-size: 1.1rem;
@@ -1036,7 +1177,7 @@
         .ai-control {
             position: fixed;
             bottom: 85px;
-            right: 20px;
+            left: 20px;
             background: white;
             color: white;
             border: none;
@@ -1069,7 +1210,7 @@
         .developer-control {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             background: white;
             color: white;
             border: none;
@@ -1409,7 +1550,7 @@
 
             .ai-control, .developer-control {
                 bottom: 15px;
-                right: 15px;
+                left: 15px;
                 width: 45px;
                 height: 45px;
             }
@@ -1428,31 +1569,22 @@
                 height: 100px;
             }
             
-            /* Welcome Modal Responsive */
-            .welcome-content {
-                padding: 25px 20px;
-            }
-            
-            .welcome-image-container {
+            /* Splash screen responsive */
+            .splash-logo {
                 width: 100px;
                 height: 100px;
-                top: -50px;
             }
             
-            .welcome-text {
-                margin-top: 60px;
-            }
-            
-            .welcome-text h2 {
+            .splash-text {
                 font-size: 1.3rem;
             }
             
-            .welcome-buttons {
+            .update-apps {
                 flex-direction: column;
-                gap: 10px;
+                align-items: center;
             }
             
-            .welcome-btn {
+            .update-app {
                 width: 100%;
             }
         }
@@ -1476,7 +1608,7 @@
                 order: 3;
                 position: absolute;
                 top: 15px;
-                right: 15px;
+                left: 15px;
             }
 
             .app-item {
@@ -1534,12 +1666,42 @@
 </head>
 <body>
 
-    <!-- Welcome Modal -->
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-logo">
+            <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/599725445_122164053176762399_482645113107095838_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=5ZocKwDAOFYQ7kNvwHLYQ_4&_nc_oc=AdkChw-7c9HCJGwAztW9P4LLtIRjcNDuzFKv03yI0UnEuUcB4V1WfeKfngJ6Go-TPwk&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=TQGBq98YO-YBW4p6UIhUeA&oh=00_AfnkIQoKeSXrbbPqUDNaqD6HCi5OVLlYu8_wVDtpsRBmGA&oe=6955065D" alt="iOS Store">
+        </div>
+        <div class="splash-text">جاري تحديث الموقع</div>
+        <div class="splash-subtext">يرجى الانتظار...</div>
+    </div>
+
+    <!-- Update Notification -->
+    <div class="update-notification" id="updateNotification">
+        <div class="update-content">
+            <div class="update-apps">
+                <div class="update-app">
+                    <div class="update-app-icon">
+                        <img src="https://clipartcraft.com/images/study-clipart-1.png" alt="Study Apps">
+                    </div>
+                    <div class="update-app-title">تطبيقات الدراسة</div>
+                </div>
+                <div class="update-app">
+                    <div class="update-app-icon">
+                        <img src="https://media.istockphoto.com/vectors/cinema-and-movie-design-vector-id670307858?k=20&m=670307858&s=612x612&w=0&h=Jy1L6OuTgllqt66NbtzIx2Q0AW_U8k1u1CrrygQUOps=" alt="Cinema Tv Apps">
+                    </div>
+                    <div class="update-app-title">تطبيقات السينما والتلفزيون</div>
+                </div>
+            </div>
+            <div class="update-message">تم اضافة تطبيقات جديدة في هذه الأقسام</div>
+        </div>
+    </div>
+
+    <!-- Welcome Modal (for developer image) -->
     <div class="welcome-modal" id="welcomeModal">
         <div class="welcome-content">
             <div class="welcome-image-container">
                 <div class="welcome-image-circle">
-                    <img src="https://scontent-hbe1-2.xx.fbcdn.net/v/t39.30808-6/596700204_1433441464875227_3992499332247550775_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Xob93GznLuAQ7kNvwElPTjx&_nc_oc=AdlgBLQM49IazplgtiHblpCyjvDU7f33ssnkzPqOIKpoBfAqT47gwh9J6gXtdf2xiGc&_nc_zt=23&_nc_ht=scontent-hbe1-2.xx&_nc_gid=rCYpkl7vpk_lqENxaUFxSQ&oh=00_Afmg60G-_JqPX7VDI9Zj6fI0gLeS9dNv9VHnFvfdoiHsNg&oe=694E4363" alt="Mohamed Ashraf">
+                    <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/605661769_1442163927336314_4898118398799832092_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=CxEpxr3apB4Q7kNvwFtpVgi&_nc_oc=Adn7okC14b7Z1-LiEpYSFQ9ZyyyL58rs-0jPEz0DOCYk6LDrW4QkrtvzBXFTEKvDf9g&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=7ClrAa8-Jh7OKDk4b40G9A&oh=00_AfnJW0yp2ZsOpg0jSKLZ0mJufj4eR_GMIE3nwMw_-WlovQ&oe=6954DB7F" alt="Mohamed Ashraf">
                 </div>
             </div>
             
@@ -1549,8 +1711,8 @@
             </div>
             
             <div class="welcome-buttons">
-                <button class="welcome-btn no" id="welcomeNo">NO</button>
-                <button class="welcome-btn yes" id="welcomeYes">Okay</button>
+                <button class="welcome-btn no" id="welcomeNo">لا</button>
+                <button class="welcome-btn yes" id="welcomeYes">نعم</button>
             </div>
         </div>
     </div>
@@ -1562,13 +1724,13 @@
             <div class="about-content">
                 <h2>About iOS Store</h2>
                 <p>
-                    iOS Store is your premier destination for getting the best modified and premium applications for iOS. 
-                    We offer a variety of free apps with additional features not available in standard versions. 
+                    متجر iOS هو وجهتك المميزة للحصول على أفضل التطبيقات المعدلة والمتميزة لنظام iOS. 
+                    نقدم مجموعة متنوعة من التطبيقات المجانية بميزات إضافية غير متاحة في الإصدارات القياسية. 
                 </p>
                 <p>
-                    We continuously work on updating applications to ensure compatibility with the latest iOS versions and provide the best user experience.
+                    نعمل باستمرار على تحديث التطبيقات لضمان التوافق مع أحدث إصدارات iOS وتقديم أفضل تجربة للمستخدم.
                 </p>
-                <p class="developer">Developer: Mohamed Ashraf</p>
+                <p class="developer">المطور: محمد أشرف</p>
             </div>
         </div>
     </div>
@@ -1579,16 +1741,16 @@
             <button class="close-modal" id="closeDeveloperModal">&times;</button>
             <div class="developer-content">
                 <div class="developer-image">
-                    <img src="https://scontent-hbe1-2.xx.fbcdn.net/v/t39.30808-6/596700204_1433441464875227_3992499332247550775_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Xob93GznLuAQ7kNvwElPTjx&_nc_oc=AdlgBLQM49IazplgtiHblpCyjvDU7f33ssnkzPqOIKpoBfAqT47gwh9J6gXtdf2xiGc&_nc_zt=23&_nc_ht=scontent-hbe1-2.xx&_nc_gid=rCYpkl7vpk_lqENxaUFxSQ&oh=00_Afmg60G-_JqPX7VDI9Zj6fI0gLeS9dNv9VHnFvfdoiHsNg&oe=694E4363" alt="Mohamed Ashraf">
+                    <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/605661769_1442163927336314_4898118398799832092_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=CxEpxr3apB4Q7kNvwFtpVgi&_nc_oc=Adn7okC14b7Z1-LiEpYSFQ9ZyyyL58rs-0jPEz0DOCYk6LDrW4QkrtvzBXFTEKvDf9g&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=7ClrAa8-Jh7OKDk4b40G9A&oh=00_AfnJW0yp2ZsOpg0jSKLZ0mJufj4eR_GMIE3nwMw_-WlovQ&oe=6954DB7F" alt="Mohamed Ashraf">
                 </div>
                 <h2>Mohamed Ashraf</h2>
                 <div class="developer-info">
-                    <p><strong>Name:</strong> Mohamed Ashraf</p>
-                    <p><strong>Age:</strong> 18</p>
-                    <p><strong>Profession:</strong> Web Developer</p>
+                    <p><strong>الاسم:</strong> محمد أشرف</p>
+                    <p><strong>العمر:</strong> 18</p>
+                    <p><strong>المهنة:</strong> مطور مواقع ويب</p>
                 </div>
                 <a href="https://wa.me/201550425843" class="developer-contact-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contact Me
+                    <i class="fab fa-whatsapp"></i> تواصل معي
                 </a>
             </div>
         </div>
@@ -1601,7 +1763,7 @@
 
     <!-- Developer Control Button -->
     <button class="developer-control" id="developerControl">
-        <img src="https://scontent-hbe1-2.xx.fbcdn.net/v/t39.30808-6/596700204_1433441464875227_3992499332247550775_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Xob93GznLuAQ7kNvwElPTjx&_nc_oc=AdlgBLQM49IazplgtiHblpCyjvDU7f33ssnkzPqOIKpoBfAqT47gwh9J6gXtdf2xiGc&_nc_zt=23&_nc_ht=scontent-hbe1-2.xx&_nc_gid=rCYpkl7vpk_lqENxaUFxSQ&oh=00_Afmg60G-_JqPX7VDI9Zj6fI0gLeS9dNv9VHnFvfdoiHsNg&oe=694E4363" alt="Developer">
+        <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/605661769_1442163927336314_4898118398799832092_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=CxEpxr3apB4Q7kNvwFtpVgi&_nc_oc=Adn7okC14b7Z1-LiEpYSFQ9ZyyyL58rs-0jPEz0DOCYk6LDrW4QkrtvzBXFTEKvDf9g&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=7ClrAa8-Jh7OKDk4b40G9A&oh=00_AfnJW0yp2ZsOpg0jSKLZ0mJufj4eR_GMIE3nwMw_-WlovQ&oe=6954DB7F" alt="Developer">
     </button>
 
     <!-- Download Modal -->
@@ -1609,8 +1771,8 @@
         <div class="modal-content">
             <button class="close-modal" id="closeDownloadModal">&times;</button>
             <div class="modal-header">
-                <h2 id="modalAppTitle">Download App</h2>
-                <p id="modalAppDescription">Choose your preferred version</p>
+                <h2 id="modalAppTitle">تحميل التطبيق</h2>
+                <p id="modalAppDescription">اختر الإصدار المفضل لديك</p>
             </div>
             <div class="download-options" id="downloadOptions">
                 <!-- Options will be dynamically inserted here -->
@@ -1624,19 +1786,19 @@
             <button class="close-modal" id="closeAppDetailModal">&times;</button>
             <div class="app-detail-header">
                 <div class="app-detail-icon" id="appDetailIcon"></div>
-                <h2 class="app-detail-title" id="appDetailTitle">App Name</h2>
+                <h2 class="app-detail-title" id="appDetailTitle">اسم التطبيق</h2>
             </div>
             <div class="app-detail-description" id="appDetailDescription">
-                App description goes here.
+                وصف التطبيق يظهر هنا.
             </div>
             <div class="app-features">
-                <h3>Main Features</h3>
+                <h3>المميزات الرئيسية</h3>
                 <ul id="appFeaturesList">
                     <!-- Features will be dynamically inserted here -->
                 </ul>
             </div>
             <div class="app-detail-footer">
-                <a href="#" class="app-detail-btn" id="appDetailDownloadLink" target="_blank">Get Now</a>
+                <a href="#" class="app-detail-btn" id="appDetailDownloadLink" target="_blank">تحميل التطبيق</a>
             </div>
         </div>
     </div>
@@ -1672,9 +1834,11 @@
         <!-- UPDATED HERO SECTION -->
         <section class="hero">
             <div class="hero-image-container">
-                <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/599725445_122164053176762399_482645113107095838_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=KBscFBKW8RUQ7kNvwES0aDV&_nc_oc=AdmAoFk3ePE_U09jhDXTyIFhWGJPO1H3TWFeZ36nLY6gLgzb7Jdk9YqawhbZ5mTu3IA&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=22lGcGkPO-1ueFKhBCYBOA&oh=00_AfnwMpPmdFM2eeuUg8q_vMZMVSDO19WNE8kwAdB3k3UZmQ&oe=694E369D" alt="iOS Store">
+                <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/599725445_122164053176762399_482645113107095838_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=5ZocKwDAOFYQ7kNvwHLYQ_4&_nc_oc=AdkChw-7c9HCJGwAztW9P4LLtIRjcNDuzFKv03yI0UnEuUcB4V1WfeKfngJ6Go-TPwk&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=TQGBq98YO-YBW4p6UIhUeA&oh=00_AfnkIQoKeSXrbbPqUDNaqD6HCi5OVLlYu8_wVDtpsRBmGA&oe=6955065D" alt="iOS Store">
             </div>
             <h1>Welcome to iOS Store</h1>
+            <p></p>
+        </section>
 
         <section class="apps-container">
             <h2 class="apps-title">Available Applications</h2>
@@ -1698,10 +1862,10 @@
                         </div>
                         <div class="app-details">
                             <h3>WhatsApp</h3>
-                            <p>Enhanced messaging with additional features</p>
+                            <p>مراسلة محسنة بميزات إضافية</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="whatsapp">Get Now</button>
+                    <button class="get-now-btn" data-app="whatsapp">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 2 - Instagram -->
@@ -1712,10 +1876,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Instagram</h3>
-                            <p>Share moments with enhanced features</p>
+                            <p>مشاركة اللحظات بميزات محسنة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="instagram">Get Now</button>
+                    <button class="get-now-btn" data-app="instagram">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 3 - Telegram -->
@@ -1726,10 +1890,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Telegram</h3>
-                            <p>Fast and secure messaging with advanced features</p>
+                            <p>مراسلة سريعة وآمنة بميزات متقدمة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="telegram">Get Now</button>
+                    <button class="get-now-btn" data-app="telegram">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 4 - TikTok -->
@@ -1740,10 +1904,10 @@
                         </div>
                         <div class="app-details">
                             <h3>TikTok</h3>
-                            <p>Create and discover short videos with enhanced editing</p>
+                            <p>إنشاء واستكشاف مقاطع فيديو قصيرة بميزات محسنة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="tiktok">Get Now</button>
+                    <button class="get-now-btn" data-app="tiktok">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 5 - CapCut -->
@@ -1754,10 +1918,10 @@
                         </div>
                         <div class="app-details">
                             <h3>CapCut</h3>
-                            <p>Professional video editing with premium features unlocked</p>
+                            <p>تعديل الفيديو الاحترافي بميزات مميزة مفتوحة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="capcut">Get Now</button>
+                    <button class="get-now-btn" data-app="capcut">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 6 - InShot -->
@@ -1768,10 +1932,10 @@
                         </div>
                         <div class="app-details">
                             <h3>InShot</h3>
-                            <p>Professional video editing with no watermark</p>
+                            <p>تعديل الفيديو الاحترافي بدون علامة مائية</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="inshot">Get Now</button>
+                    <button class="get-now-btn" data-app="inshot">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 7 - Picsart -->
@@ -1782,10 +1946,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Picsart</h3>
-                            <p>Comprehensive photo editing with all features unlocked</p>
+                            <p>تعديل الصور الشامل بجميع الميزات مفتوحة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="picsart">Get Now</button>
+                    <button class="get-now-btn" data-app="picsart">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 8 - YouTube -->
@@ -1796,10 +1960,10 @@
                         </div>
                         <div class="app-details">
                             <h3>YouTube Premium</h3>
-                            <p>Ad-free videos, background play, and downloads</p>
+                            <p>فيديوهات بدون إعلانات، تشغيل في الخلفية، وتنزيل</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="youtube">Get Now</button>
+                    <button class="get-now-btn" data-app="youtube">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 9 - Spotify -->
@@ -1810,10 +1974,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Spotify Premium</h3>
-                            <p>Ad-free music, unlimited skips, and offline downloads</p>
+                            <p>موسيقى بدون إعلانات، تخطي غير محدود، وتنزيل للاستماع بدون اتصال</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="spotify">Get Now</button>
+                    <button class="get-now-btn" data-app="spotify">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 10 - This PC -->
@@ -1824,25 +1988,26 @@
                         </div>
                         <div class="app-details">
                             <h3>This PC</h3>
-                            <p>Transform your iPhone into a computer experience</p>
+                            <p>حول هاتفك إلى تجربة كمبيوتر</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="thispc">Get Now</button>
+                    <button class="get-now-btn" data-app="thispc">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 11 - Study Apps -->
-<div class="app-item">
-    <div class="app-info">
-        <div class="app-icon studyapps-icon">
-            <img src="https://clipartcraft.com/images/study-clipart-1.png" alt="Study Apps">
-        </div>
-        <div class="app-details">
-            <h3>Study Apps</h3>
-            <p>Educational apps for secondary school students</p>
-        </div>
-    </div>
-    <button class="get-now-btn" data-app="studyapps">Get Now</button>
-</div>
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon studyapps-icon">
+                            <img src="https://clipartcraft.com/images/study-clipart-1.png" alt="Study Apps">
+                        </div>
+                        <div class="app-details">
+                            <h3>Study Apps</h3>
+                            <p>تطبيقات تعليمية لطلاب المدارس الثانوية</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="studyapps">تحميل التطبيق</button>
+                </div>
+
                 <!-- App 12 - Cinema Tv Apps -->
                 <div class="app-item">
                     <div class="app-info">
@@ -1851,10 +2016,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Cinema Tv Apps</h3>
-                            <p>Movie and series streaming apps with premium activated</p>
+                            <p>تطبيقات بث الأفلام والمسلسلات مع التفعيل المميز</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="watchapps">Get Now</button>
+                    <button class="get-now-btn" data-app="watchapps">تحميل التطبيق</button>
                 </div>
 
                 <!-- App 13 - iOS Apps -->
@@ -1865,10 +2030,38 @@
                         </div>
                         <div class="app-details">
                             <h3>iOS Apps</h3>
-                            <p>Collection of iOS applications and utilities</p>
+                            <p>مجموعة من تطبيقات iOS والأدوات المساعدة</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="iosapps">Get Now</button>
+                    <button class="get-now-btn" data-app="iosapps">تحميل التطبيق</button>
+                </div>
+
+                <!-- NEW APP 14 - Shareit Lite -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon shareit-icon">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.8daZ8TYogs8LPW1lJyQYaQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Shareit Lite">
+                        </div>
+                        <div class="app-details">
+                            <h3>Shareit Lite</h3>
+                            <p>مشاركة الملفات بسرعة عالية بدون إعلانات</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="shareit">تحميل التطبيق</button>
+                </div>
+
+                <!-- NEW APP 15 - Lark Player -->
+                <div class="app-item">
+                    <div class="app-info">
+                        <div class="app-icon larkplayer-icon">
+                            <img src="https://t2.tudocdn.net/639248?w=1920" alt="Lark Player">
+                        </div>
+                        <div class="app-details">
+                            <h3>Lark Player</h3>
+                            <p>مشغل وسائط بمزايا متقدمة وجودة تشغيل محسنة بدون إعلانات</p>
+                        </div>
+                    </div>
+                    <button class="get-now-btn" data-app="larkplayer">تحميل التطبيق</button>
                 </div>
             </div>
         </section>
@@ -1881,67 +2074,78 @@
         </div>
 
         <footer>
-            <p>© Mohamed Ashraf . All rights reserved.</p>
+            <p>© Mohamed Ashraf . جميع الحقوق محفوظة.</p>
         </footer>
     </div>
 
     <script>
-        // Welcome Modal Functionality
+        // Splash Screen and Update Notification
+        const splashScreen = document.getElementById('splashScreen');
+        const updateNotification = document.getElementById('updateNotification');
+
+        // Show splash screen on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show splash screen
+            splashScreen.classList.remove('hidden');
+            
+            // After 2 seconds, hide splash and show update notification
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                updateNotification.classList.add('active');
+                
+                // After 3 seconds, hide update notification
+                setTimeout(() => {
+                    updateNotification.classList.remove('active');
+                }, 3000);
+            }, 2000);
+        });
+
+        // Welcome Modal (for developer image)
         const welcomeModal = document.getElementById('welcomeModal');
         const welcomeNoBtn = document.getElementById('welcomeNo');
         const welcomeYesBtn = document.getElementById('welcomeYes');
+        const developerControl = document.getElementById('developerControl');
 
-        // Show welcome modal on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if user has already dismissed the modal in this session
-            const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
-            
-            if (!hasSeenWelcome) {
-                // Show welcome modal after a short delay
-                setTimeout(() => {
-                    welcomeModal.classList.remove('hidden');
-                }, 500);
-            }
+        // Open welcome modal when developer image is clicked
+        developerControl.addEventListener('click', function() {
+            welcomeModal.classList.add('active');
         });
 
         // Handle NO button click
         welcomeNoBtn.addEventListener('click', function() {
-            welcomeModal.classList.add('hidden');
-            sessionStorage.setItem('hasSeenWelcome', 'true');
+            welcomeModal.classList.remove('active');
         });
 
-        // Handle YES/Okay button click
+        // Handle YES button click
         welcomeYesBtn.addEventListener('click', function() {
             // Redirect to developer's website
             window.open('https://m7ashr213-cell.github.io/Mohamed-Ashraf/', '_blank');
-            welcomeModal.classList.add('hidden');
-            sessionStorage.setItem('hasSeenWelcome', 'true');
+            welcomeModal.classList.remove('active');
         });
 
         // Close modal when clicking outside content
         welcomeModal.addEventListener('click', function(e) {
             if (e.target === welcomeModal) {
-                welcomeModal.classList.add('hidden');
-                sessionStorage.setItem('hasSeenWelcome', 'true');
+                welcomeModal.classList.remove('active');
             }
         });
 
-        // App download data
+        // App download data - UPDATED WITH ARABIC DESCRIPTIONS
         const appData = {
             whatsapp: {
-                title: "Download WhatsApp",
-                description: "Choose your preferred version",
+                title: "تحميل WhatsApp",
+                description: "اختر الإصدار المفضل لديك",
                 options: [
                     {
                         name: "MB WhatsApp",
-                        description: "Enhanced messaging with additional features",
+                        description: "مراسلة محسنة بميزات إضافية",
                         icon: "whatsapp-icon",
                         iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
                         link: "https://m7ashr213-cell.github.io/iOS-Store-MB-WhatsApp/"
                     },
                     {
                         name: "iOS WhatsApp",
-                        description: "Official WhatsApp with iOS optimizations",
+                        description: "واتساب رسمي مع تحسينات iOS",
                         icon: "whatsapp-icon",
                         iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
                         link: "https://m7ashr213-cell.github.io/iOS-Store-WhatsApp/"
@@ -1951,12 +2155,12 @@
             // App Detail Data
             instagram: {
                 title: "Instagram",
-                description: "Enhanced version of Instagram with additional features not available in the standard version",
+                description: "نسخة محسنة من انستجرام بميزات إضافية غير متاحة في الإصدار القياسي",
                 features: [
-                    "Download photos and videos in high quality",
-                    "Ad-free browsing experience",
-                    "Anonymous story viewing",
-                    "Improved and customized user interface"
+                    "تنزيل الصور ومقاطع الفيديو بجودة عالية",
+                    "تصفح بدون إعلانات",
+                    "مشاهدة القصص بشكل مجهول",
+                    "واجهة مستخدم محسنة ومخصصة"
                 ],
                 iconClass: "fab fa-instagram",
                 iconColor: "instagram-icon",
@@ -1965,12 +2169,12 @@
             },
             telegram: {
                 title: "Telegram",
-                description: "Fast and secure instant messaging app with advanced features",
+                description: "تطبيق مراسلة فوري سريع وآمن بميزات متقدمة",
                 features: [
-                    "Self-destructing secret messages",
-                    "High-quality voice and video calls",
-                    "Support for large groups up to 200,000 members",
-                    "Instant synchronization across all devices"
+                    "رسائل سرية ذاتية التدمير",
+                    "مكالمات صوتية وفيديو عالية الجودة",
+                    "دعم مجموعات كبيرة تصل إلى 200,000 عضو",
+                    "مزامنة فورية عبر جميع الأجهزة"
                 ],
                 iconClass: "fab fa-telegram",
                 iconColor: "telegram-icon",
@@ -1979,12 +2183,12 @@
             },
             tiktok: {
                 title: "TikTok",
-                description: "Leading short video platform with exclusive enhancements",
+                description: "منصة الفيديو القصيرة الرائدة مع تحسينات حصرية",
                 features: [
-                    "Download videos without watermark",
-                    "Watch videos without interruptions",
-                    "Access to all effects for free",
-                    "Improved and fast user interface"
+                    "تنزيل مقاطع الفيديو بدون علامة مائية",
+                    "مشاهدة الفيديوهات بدون انقطاع",
+                    "الوصول إلى جميع المؤثرات مجانًا",
+                    "واجهة مستخدم محسنة وسريعة"
                 ],
                 iconClass: "fab fa-tiktok",
                 iconColor: "tiktok-icon",
@@ -1993,12 +2197,12 @@
             },
             capcut: {
                 title: "CapCut",
-                description: "Professional video editing app with all premium features unlocked",
+                description: "تطبيق تعديل الفيديو الاحترافي مع جميع الميزات المميزة مفتوحة",
                 features: [
-                    "All effects and filters available for free",
-                    "Automatic watermark removal",
-                    "Support for 4K video export",
-                    "Comprehensive background music library without restrictions"
+                    "جميع المؤثرات والمرشحات متاحة مجانًا",
+                    "إزالة العلامة المائية تلقائيًا",
+                    "دعم تصدير الفيديو بدقة 4K",
+                    "مكتبة موسيقى خلفية شاملة بدون قيود"
                 ],
                 iconClass: "fas fa-scissors",
                 iconColor: "capcut-icon",
@@ -2007,12 +2211,12 @@
             },
             inshot: {
                 title: "InShot",
-                description: "Advanced video editing app with watermark removal",
+                description: "تطبيق تعديل الفيديو المتقدم مع إزالة العلامة المائية",
                 features: [
-                    "Video editing without watermark",
-                    "All stickers and filters available",
-                    "Add music and advanced sound effects",
-                    "High resolution export with fast processing"
+                    "تعديل الفيديو بدون علامة مائية",
+                    "جميع الملصقات والمرشحات متاحة",
+                    "إضافة الموسيقى ومؤثرات صوتية متقدمة",
+                    "تصدير بدقة عالية مع معالجة سريعة"
                 ],
                 iconClass: "fas fa-film",
                 iconColor: "inshot-icon",
@@ -2021,12 +2225,12 @@
             },
             picsart: {
                 title: "Picsart",
-                description: "Comprehensive photo editing app with all premium features unlocked",
+                description: "تطبيق تعديل الصور الشامل مع جميع الميزات المميزة مفتوحة",
                 features: [
-                    "All editing tools and filters available",
-                    "Unlimited stickers and graphics library",
-                    "Background removal and smart backgrounds",
-                    "High resolution export without watermark"
+                    "جميع أدوات التعديل والمرشحات متاحة",
+                    "مكتبة ملصقات ورسومات غير محدودة",
+                    "إزالة الخلفية وخلفيات ذكية",
+                    "تصدير بدقة عالية بدون علامة مائية"
                 ],
                 iconClass: "fas fa-paint-brush",
                 iconColor: "picsart-icon",
@@ -2035,12 +2239,12 @@
             },
             youtube: {
                 title: "YouTube Premium",
-                description: "Enjoy YouTube without ads with additional features",
+                description: "استمتع بيوتيوب بدون إعلانات مع ميزات إضافية",
                 features: [
-                    "Watch videos without ad interruptions",
-                    "Background video playback",
-                    "Download videos for offline viewing",
-                    "Support for video quality up to 4K"
+                    "مشاهدة الفيديوهات بدون انقطاع الإعلانات",
+                    "تشغيل الفيديو في الخلفية",
+                    "تنزيل الفيديوهات للمشاهدة دون اتصال",
+                    "دعم جودة الفيديو حتى 4K"
                 ],
                 iconClass: "fab fa-youtube",
                 iconColor: "youtube-icon",
@@ -2049,12 +2253,12 @@
             },
             spotify: {
                 title: "Spotify Premium",
-                description: "Listen to music without ads with advanced features",
+                description: "استمع إلى الموسيقى بدون إعلانات مع ميزات متقدمة",
                 features: [
-                    "Listen to music without ads",
-                    "Unlimited song skipping",
-                    "Download songs for offline listening",
-                    "High sound quality and advanced control features"
+                    "استماع إلى الموسيقى بدون إعلانات",
+                    "تخطي الأغاني غير محدود",
+                    "تنزيل الأغاني للاستماع بدون اتصال",
+                    "جودة صوت عالية وميزات تحكم متقدمة"
                 ],
                 iconClass: "fab fa-spotify",
                 iconColor: "spotify-icon",
@@ -2063,12 +2267,12 @@
             },
             thispc: {
                 title: "This PC",
-                description: "Transform your phone into a computer experience with Windows-like interface",
+                description: "حول هاتفك إلى تجربة كمبيوتر مع واجهة تشبه Windows",
                 features: [
-                    "Windows-like user interface",
-                    "Easy file and folder management",
-                    "Run applications in computer mode",
-                    "Professional and advanced user experience"
+                    "واجهة مستخدم تشبه Windows",
+                    "إدارة سهلة للملفات والمجلدات",
+                    "تشغيل التطبيقات في وضع الكمبيوتر",
+                    "تجربة مستخدم احترافية ومتقدمة"
                 ],
                 iconClass: "fas fa-laptop",
                 iconColor: "thispc-icon",
@@ -2076,28 +2280,27 @@
                 link: "https://m7ashr213-cell.github.io/iOS-Store-This-PC/"
             },
             studyapps: {
-    title: "Study Apps",
-    description: "Comprehensive educational applications for secondary school students",
-    features: [
-        "Comprehensive curriculum for secondary education",
-        "Interactive lessons and exercises",
-        "Exam preparation materials",
-        "Progress tracking and performance analytics"
-    ],
-    iconClass: "fas fa-graduation-cap",
-    iconColor: "studyapps-icon",
-    iconImage: "https://clipartcraft.com/images/study-clipart-1.png",
-    link: "https://m7ashr213-cell.github.io/Study-Apps/"
-
+                title: "Study Apps",
+                description: "تطبيقات تعليمية شاملة لطلاب المدارس الثانوية",
+                features: [
+                    "منهج شامل للتعليم الثانوي",
+                    "دروس وتمارين تفاعلية",
+                    "مواد تحضيرية للامتحانات",
+                    "تتبع التقدم وتحليل الأداء"
+                ],
+                iconClass: "fas fa-graduation-cap",
+                iconColor: "studyapps-icon",
+                iconImage: "https://clipartcraft.com/images/study-clipart-1.png",
+                link: "https://m7ashr213-cell.github.io/Study-Apps/"
             },
             watchapps: {
                 title: "Cinema Tv Apps",
-                description: "Movie and series streaming apps with premium activated",
+                description: "تطبيقات بث الأفلام والمسلسلات مع التفعيل المميز",
                 features: [
-                    "Watch movies and series without ads",
-                    "Support for anime content in high quality",
-                    "All premium features activated for free",
-                    "Improved and easy-to-use user interface"
+                    "مشاهدة الأفلام والمسلسلات بدون إعلانات",
+                    "دعم محتوى الأنمي بجودة عالية",
+                    "جميع الميزات المميزة مفعلة مجانًا",
+                    "واجهة مستخدم محسنة وسهلة الاستخدام"
                 ],
                 iconClass: "fas fa-film",
                 iconColor: "watchapps-icon",
@@ -2106,17 +2309,45 @@
             },
             iosapps: {
                 title: "iOS Apps",
-                description: "Comprehensive collection of iOS applications and utilities",
+                description: "مجموعة شاملة من تطبيقات iOS والأدوات المساعدة",
                 features: [
-                    "Variety of premium applications",
-                    "Continuous app updates",
-                    "Simple and easy-to-use interface",
-                    "Full support for the latest iOS versions"
+                    "مجموعة متنوعة من التطبيقات المميزة",
+                    "تحديثات مستمرة للتطبيقات",
+                    "واجهة بسيطة وسهلة الاستخدام",
+                    "دعم كامل لأحدث إصدارات iOS"
                 ],
                 iconClass: "fas fa-mobile-alt",
                 iconColor: "iosapps-icon",
                 iconImage: "https://thvnext.bing.com/th/id/OIP.Liy9wv46y0WP3_2ZJpTO2AHaHa?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
                 link: "https://m7ashr213-cell.github.io/iOS-Store-iOS-Apps/"
+            },
+            shareit: {
+                title: "Shareit Lite",
+                description: "تطبيق مشاركة الملفات بسرعة عالية بدون إعلانات وبجودة محسنة",
+                features: [
+                    "مشاركة الملفات بسرعة فائقة",
+                    "بدون إعلانات مزعجة",
+                    "دعم جميع أنواع الملفات",
+                    "واجهة مستخدم محسنة وسهلة الاستخدام"
+                ],
+                iconClass: "fas fa-share-alt",
+                iconColor: "shareit-icon",
+                iconImage: "https://tse1.mm.bing.net/th/id/OIP.8daZ8TYogs8LPW1lJyQYaQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+                link: "#"
+            },
+            larkplayer: {
+                title: "Lark Player",
+                description: "مشغل وسائط متقدم بمزايا متقدمة وجودة تشغيل محسنة بدون إعلانات",
+                features: [
+                    "تشغيل جميع صيغ الوسائط",
+                    "بدون إعلانات أثناء التشغيل",
+                    "جودة تشغيل محسنة ووضوح عالي",
+                    "ميزات تحكم متقدمة وإعدادات مخصصة"
+                ],
+                iconClass: "fas fa-play-circle",
+                iconColor: "larkplayer-icon",
+                iconImage: "https://t2.tudocdn.net/639248?w=1920",
+                link: "#"
             }
         };
 
@@ -2189,13 +2420,6 @@
                 hero.style.opacity = '1';
                 hero.style.transform = 'translateY(0)';
             }, 500);
-            
-            // Play audio message on page load (only if welcome modal is not shown)
-            setTimeout(() => {
-                if (!sessionStorage.getItem('hasSeenWelcome')) {
-                    playWelcomeMessage();
-                }
-            }, 1000);
         });
 
         // Enhanced modal animations
@@ -2246,13 +2470,8 @@
         });
 
         // Developer Modal Functionality
-        const developerControl = document.getElementById('developerControl');
         const developerModal = document.getElementById('developerModal');
         const closeDeveloperModal = document.getElementById('closeDeveloperModal');
-
-        developerControl.addEventListener('click', () => {
-            developerModal.classList.add('active');
-        });
 
         closeDeveloperModal.addEventListener('click', () => {
             developerModal.classList.remove('active');
@@ -2311,23 +2530,20 @@
                 window.speechSynthesis.cancel();
                 
                 const message = new SpeechSynthesisUtterance();
-                message.text = "Welcome to the iOS applications store. Here you will find the best modified applications ever. To contact the developer for more details, click on the WhatsApp icon. Goodbye and stay safe.";
-                message.lang = 'en-US';
+                message.text = "Welcome to iOS Store";
+                message.lang = 'ar-SA';
                 message.rate = 0.9; // Speech speed
                 message.pitch = 1; // Voice pitch
                 message.volume = 1; // Volume level
                 
-                // Try to use a female voice if available
+                // Try to use an Arabic voice if available
                 const voices = speechSynthesis.getVoices();
-                const femaleVoice = voices.find(voice => 
-                    voice.name.includes('Female') || 
-                    voice.name.includes('Samantha') ||
-                    voice.name.includes('Karen') ||
-                    voice.name.includes('Victoria')
+                const arabicVoice = voices.find(voice => 
+                    voice.lang.includes('ar')
                 );
                 
-                if (femaleVoice) {
-                    message.voice = femaleVoice;
+                if (arabicVoice) {
+                    message.voice = arabicVoice;
                 }
                 
                 window.speechSynthesis.speak(message);
@@ -2381,7 +2597,7 @@
                                     <p>${option.description}</p>
                                 </div>
                             </div>
-                            <a href="${option.link}" class="download-btn" target="_blank">Get Now</a>
+                            <a href="${option.link}" class="download-btn" target="_blank">تحميل التطبيق</a>
                         `;
                         downloadOptions.appendChild(optionElement);
                     });
@@ -2460,10 +2676,13 @@
             // Wait for voices to load
             setTimeout(() => {
                 speechSynthesis.getVoices();
+                
+                // Play Arabic welcome message after page loads
+                setTimeout(() => {
+                    playWelcomeMessage();
+                }, 1000);
             }, 100);
         });
     </script>
 </body>
 </html>
-
-
