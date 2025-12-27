@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -298,7 +298,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Tahoma', sans-serif;
+            font-family: 'Segoe UI', -iOS-system, BlinkMacSystemFont, 'Tahoma', sans-serif;
         }
 
         body {
@@ -467,7 +467,7 @@
 
         .search-input {
             width: 100%;
-            padding: 15px 50px 15px 20px;
+            padding: 15px 20px 15px 50px;
             border-radius: 50px;
             border: none;
             background-color: var(--background-color);
@@ -484,7 +484,7 @@
 
         .search-icon {
             position: absolute;
-            right: 20px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary-color);
@@ -626,12 +626,14 @@
             font-size: 1.1rem;
             margin-bottom: 5px;
             font-weight: 600;
+            text-align: left;
         }
 
         .option-details p {
             font-size: 0.8rem;
             opacity: 0.7;
             line-height: 1.4;
+            text-align: left;
         }
 
         .download-btn {
@@ -769,7 +771,7 @@
 
         .app-features ul {
             list-style-type: none;
-            padding-right: 0;
+            padding-left: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -777,15 +779,15 @@
 
         .app-features li {
             margin-bottom: 8px;
-            padding-right: 20px;
+            padding-left: 20px;
             position: relative;
-            text-align: right;
+            text-align: left;
         }
 
         .app-features li:before {
             content: "✓";
             position: absolute;
-            right: 0;
+            left: 0;
             color: var(--accent-color);
             font-weight: bold;
         }
@@ -885,7 +887,7 @@
         }
 
         .developer-info {
-            text-align: right;
+            text-align: left;
             background-color: var(--background-color);
             padding: 15px;
             border-radius: 12px;
@@ -930,7 +932,7 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Apps Section - WIDER LAYOUT */
+        /* Apps Section - WIDER LAYOUT - MODIFIED LAYOUT */
         .apps-container {
             background-color: var(--card-color);
             border-radius: 16px;
@@ -1003,7 +1005,7 @@
             content: "PRO";
             position: absolute;
             top: -5px;
-            left: -5px;
+            right: -5px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000;
             font-size: 8px;
@@ -1036,6 +1038,11 @@
         }
         .shareit-icon { background: linear-gradient(135deg, #00B0FF, #0091EA); }
         .larkplayer-icon { background: linear-gradient(135deg, #FF6B35, #FFA500); }
+
+        .app-details {
+            text-align: left;
+            flex: 1;
+        }
 
         .app-details h3 {
             font-size: 1.1rem;
@@ -1177,7 +1184,7 @@
         .ai-control {
             position: fixed;
             bottom: 85px;
-            left: 20px;
+            right: 20px;
             background: white;
             color: white;
             border: none;
@@ -1210,7 +1217,7 @@
         .developer-control {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            right: 20px;
             background: white;
             color: white;
             border: none;
@@ -1550,7 +1557,7 @@
 
             .ai-control, .developer-control {
                 bottom: 15px;
-                left: 15px;
+                right: 15px;
                 width: 45px;
                 height: 45px;
             }
@@ -1608,7 +1615,7 @@
                 order: 3;
                 position: absolute;
                 top: 15px;
-                left: 15px;
+                right: 15px;
             }
 
             .app-item {
@@ -1646,6 +1653,7 @@
             
             .developer-control {
                 bottom: 20px;
+                right: 20px;
             }
 
             .hero-image-container {
@@ -1683,13 +1691,13 @@
                     <div class="update-app-icon">
                         <img src="https://clipartcraft.com/images/study-clipart-1.png" alt="Study Apps">
                     </div>
-                    <div class="update-app-title">تطبيقات الدراسة</div>
+                    <div class="update-app-title">Study Apps</div>
                 </div>
                 <div class="update-app">
                     <div class="update-app-icon">
                         <img src="https://media.istockphoto.com/vectors/cinema-and-movie-design-vector-id670307858?k=20&m=670307858&s=612x612&w=0&h=Jy1L6OuTgllqt66NbtzIx2Q0AW_U8k1u1CrrygQUOps=" alt="Cinema Tv Apps">
                     </div>
-                    <div class="update-app-title">تطبيقات السينما والتلفزيون</div>
+                    <div class="update-app-title">Cinema & TV Apps</div>
                 </div>
             </div>
             <div class="update-message">تم اضافة تطبيقات جديدة في هذه الأقسام</div>
@@ -1711,8 +1719,8 @@
             </div>
             
             <div class="welcome-buttons">
-                <button class="welcome-btn no" id="welcomeNo">لا</button>
-                <button class="welcome-btn yes" id="welcomeYes">نعم</button>
+                <button class="welcome-btn no" id="welcomeNo">No</button>
+                <button class="welcome-btn yes" id="welcomeYes">Yes</button>
             </div>
         </div>
     </div>
@@ -1724,13 +1732,13 @@
             <div class="about-content">
                 <h2>About iOS Store</h2>
                 <p>
-                    متجر iOS هو وجهتك المميزة للحصول على أفضل التطبيقات المعدلة والمتميزة لنظام iOS. 
-                    نقدم مجموعة متنوعة من التطبيقات المجانية بميزات إضافية غير متاحة في الإصدارات القياسية. 
+                    iOS Store is your premier destination for getting the best modified and premium iOS applications. 
+                    We offer a variety of free applications with additional features not available in standard versions. 
                 </p>
                 <p>
-                    نعمل باستمرار على تحديث التطبيقات لضمان التوافق مع أحدث إصدارات iOS وتقديم أفضل تجربة للمستخدم.
+                    We continuously update applications to ensure compatibility with the latest iOS versions and provide the best user experience.
                 </p>
-                <p class="developer">المطور: محمد أشرف</p>
+                <p class="developer">Developer: Mohamed Ashraf</p>
             </div>
         </div>
     </div>
@@ -1745,12 +1753,12 @@
                 </div>
                 <h2>Mohamed Ashraf</h2>
                 <div class="developer-info">
-                    <p><strong>الاسم:</strong> محمد أشرف</p>
-                    <p><strong>العمر:</strong> 18</p>
-                    <p><strong>المهنة:</strong> مطور مواقع ويب</p>
+                    <p><strong>Name:</strong> Mohamed Ashraf</p>
+                    <p><strong>Age:</strong> 18</p>
+                    <p><strong>Profession:</strong> Web Developer</p>
                 </div>
                 <a href="https://wa.me/201550425843" class="developer-contact-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> تواصل معي
+                    <i class="fab fa-whatsapp"></i> Contact Me
                 </a>
             </div>
         </div>
@@ -1771,8 +1779,8 @@
         <div class="modal-content">
             <button class="close-modal" id="closeDownloadModal">&times;</button>
             <div class="modal-header">
-                <h2 id="modalAppTitle">تحميل التطبيق</h2>
-                <p id="modalAppDescription">اختر الإصدار المفضل لديك</p>
+                <h2 id="modalAppTitle">Download App</h2>
+                <p id="modalAppDescription">Choose your preferred version</p>
             </div>
             <div class="download-options" id="downloadOptions">
                 <!-- Options will be dynamically inserted here -->
@@ -1786,19 +1794,19 @@
             <button class="close-modal" id="closeAppDetailModal">&times;</button>
             <div class="app-detail-header">
                 <div class="app-detail-icon" id="appDetailIcon"></div>
-                <h2 class="app-detail-title" id="appDetailTitle">اسم التطبيق</h2>
+                <h2 class="app-detail-title" id="appDetailTitle">App Name</h2>
             </div>
             <div class="app-detail-description" id="appDetailDescription">
-                وصف التطبيق يظهر هنا.
+                App description appears here.
             </div>
             <div class="app-features">
-                <h3>المميزات الرئيسية</h3>
+                <h3>Main Features</h3>
                 <ul id="appFeaturesList">
                     <!-- Features will be dynamically inserted here -->
                 </ul>
             </div>
             <div class="app-detail-footer">
-                <a href="#" class="app-detail-btn" id="appDetailDownloadLink" target="_blank">تحميل التطبيق</a>
+                <a href="#" class="app-detail-btn" id="appDetailDownloadLink" target="_blank">Download App</a>
             </div>
         </div>
     </div>
@@ -1837,7 +1845,7 @@
                 <img src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/599725445_122164053176762399_482645113107095838_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=5ZocKwDAOFYQ7kNvwHLYQ_4&_nc_oc=AdkChw-7c9HCJGwAztW9P4LLtIRjcNDuzFKv03yI0UnEuUcB4V1WfeKfngJ6Go-TPwk&_nc_zt=23&_nc_ht=scontent-hbe1-1.xx&_nc_gid=TQGBq98YO-YBW4p6UIhUeA&oh=00_AfnkIQoKeSXrbbPqUDNaqD6HCi5OVLlYu8_wVDtpsRBmGA&oe=6955065D" alt="iOS Store">
             </div>
             <h1>Welcome to iOS Store</h1>
-            <p></p>
+            <p>Your destination for premium iOS applications with enhanced features</p>
         </section>
 
         <section class="apps-container">
@@ -1862,10 +1870,10 @@
                         </div>
                         <div class="app-details">
                             <h3>WhatsApp</h3>
-                            <p>مراسلة محسنة بميزات إضافية</p>
+                            <p>Enhanced messaging with additional features</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="whatsapp">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="whatsapp">Download App</button>
                 </div>
 
                 <!-- App 2 - Instagram -->
@@ -1876,10 +1884,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Instagram</h3>
-                            <p>مشاركة اللحظات بميزات محسنة</p>
+                            <p>Share moments with enhanced features</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="instagram">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="instagram">Download App</button>
                 </div>
 
                 <!-- App 3 - Telegram -->
@@ -1890,10 +1898,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Telegram</h3>
-                            <p>مراسلة سريعة وآمنة بميزات متقدمة</p>
+                            <p>Fast and secure messaging with advanced features</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="telegram">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="telegram">Download App</button>
                 </div>
 
                 <!-- App 4 - TikTok -->
@@ -1904,10 +1912,10 @@
                         </div>
                         <div class="app-details">
                             <h3>TikTok</h3>
-                            <p>إنشاء واستكشاف مقاطع فيديو قصيرة بميزات محسنة</p>
+                            <p>Create and explore short videos with enhanced features</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="tiktok">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="tiktok">Download App</button>
                 </div>
 
                 <!-- App 5 - CapCut -->
@@ -1918,10 +1926,10 @@
                         </div>
                         <div class="app-details">
                             <h3>CapCut</h3>
-                            <p>تعديل الفيديو الاحترافي بميزات مميزة مفتوحة</p>
+                            <p>Professional video editing with unlocked features</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="capcut">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="capcut">Download App</button>
                 </div>
 
                 <!-- App 6 - InShot -->
@@ -1932,10 +1940,10 @@
                         </div>
                         <div class="app-details">
                             <h3>InShot</h3>
-                            <p>تعديل الفيديو الاحترافي بدون علامة مائية</p>
+                            <p>Professional video editing without watermark</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="inshot">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="inshot">Download App</button>
                 </div>
 
                 <!-- App 7 - Picsart -->
@@ -1946,10 +1954,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Picsart</h3>
-                            <p>تعديل الصور الشامل بجميع الميزات مفتوحة</p>
+                            <p>Comprehensive photo editing with all features unlocked</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="picsart">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="picsart">Download App</button>
                 </div>
 
                 <!-- App 8 - YouTube -->
@@ -1960,10 +1968,10 @@
                         </div>
                         <div class="app-details">
                             <h3>YouTube Premium</h3>
-                            <p>فيديوهات بدون إعلانات، تشغيل في الخلفية، وتنزيل</p>
+                            <p>Videos without ads, background play, and download</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="youtube">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="youtube">Download App</button>
                 </div>
 
                 <!-- App 9 - Spotify -->
@@ -1974,10 +1982,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Spotify Premium</h3>
-                            <p>موسيقى بدون إعلانات، تخطي غير محدود، وتنزيل للاستماع بدون اتصال</p>
+                            <p>Music without ads, unlimited skips, and offline listening</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="spotify">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="spotify">Download App</button>
                 </div>
 
                 <!-- App 10 - This PC -->
@@ -1988,10 +1996,10 @@
                         </div>
                         <div class="app-details">
                             <h3>This PC</h3>
-                            <p>حول هاتفك إلى تجربة كمبيوتر</p>
+                            <p>Turn your phone into a computer experience</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="thispc">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="thispc">Download App</button>
                 </div>
 
                 <!-- App 11 - Study Apps -->
@@ -2002,10 +2010,10 @@
                         </div>
                         <div class="app-details">
                             <h3>Study Apps</h3>
-                            <p>تطبيقات تعليمية لطلاب المدارس الثانوية</p>
+                            <p>Educational apps for high school students</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="studyapps">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="studyapps">Download App</button>
                 </div>
 
                 <!-- App 12 - Cinema Tv Apps -->
@@ -2015,11 +2023,11 @@
                             <img src="https://media.istockphoto.com/vectors/cinema-and-movie-design-vector-id670307858?k=20&m=670307858&s=612x612&w=0&h=Jy1L6OuTgllqt66NbtzIx2Q0AW_U8k1u1CrrygQUOps=" alt="Cinema Tv Apps">
                         </div>
                         <div class="app-details">
-                            <h3>Cinema Tv Apps</h3>
-                            <p>تطبيقات بث الأفلام والمسلسلات مع التفعيل المميز</p>
+                            <h3>Cinema & TV Apps</h3>
+                            <p>Movie and series streaming apps with premium activation</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="watchapps">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="watchapps">Download App</button>
                 </div>
 
                 <!-- App 13 - iOS Apps -->
@@ -2030,10 +2038,10 @@
                         </div>
                         <div class="app-details">
                             <h3>iOS Apps</h3>
-                            <p>مجموعة من تطبيقات iOS والأدوات المساعدة</p>
+                            <p>Collection of iOS apps and utilities</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="iosapps">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="iosapps">Download App</button>
                 </div>
 
                 <!-- NEW APP 14 - Shareit Lite -->
@@ -2044,24 +2052,25 @@
                         </div>
                         <div class="app-details">
                             <h3>Shareit Lite</h3>
-                            <p>مشاركة الملفات بسرعة عالية بدون إعلانات</p>
+                            <p>High-speed file sharing without ads</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="shareit">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="shareit">Download App</button>
                 </div>
 
                 <!-- NEW APP 15 - Lark Player -->
                 <div class="app-item">
                     <div class="app-info">
                         <div class="app-icon larkplayer-icon">
-                            <img src="https://t2.tudocdn.net/639248?w=1920" alt="Lark Player">
+                            <!-- Updated Lark Player image -->
+                            <img src="https://play-lh.googleusercontent.com/WfnBxlXCNhKPaBBL6VasmJw2YTURoGDFxKlJmyGdz_0b49z2nJeiaN3iCXwbcEObvzg=w240-h480-rw" alt="Lark Player">
                         </div>
                         <div class="app-details">
                             <h3>Lark Player</h3>
-                            <p>مشغل وسائط بمزايا متقدمة وجودة تشغيل محسنة بدون إعلانات</p>
+                            <p>Media player with advanced features and enhanced playback quality without ads</p>
                         </div>
                     </div>
-                    <button class="get-now-btn" data-app="larkplayer">تحميل التطبيق</button>
+                    <button class="get-now-btn" data-app="larkplayer">Download App</button>
                 </div>
             </div>
         </section>
@@ -2074,7 +2083,7 @@
         </div>
 
         <footer>
-            <p>© Mohamed Ashraf . جميع الحقوق محفوظة.</p>
+            <p>© Mohamed Ashraf . All rights reserved.</p>
         </footer>
     </div>
 
@@ -2130,22 +2139,22 @@
             }
         });
 
-        // App download data - UPDATED WITH ARABIC DESCRIPTIONS
+        // App download data - UPDATED WITH ENGLISH DESCRIPTIONS
         const appData = {
             whatsapp: {
-                title: "تحميل WhatsApp",
-                description: "اختر الإصدار المفضل لديك",
+                title: "Download WhatsApp",
+                description: "Choose your preferred version",
                 options: [
                     {
                         name: "MB WhatsApp",
-                        description: "مراسلة محسنة بميزات إضافية",
+                        description: "Enhanced messaging with additional features",
                         icon: "whatsapp-icon",
                         iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
                         link: "https://m7ashr213-cell.github.io/iOS-Store-MB-WhatsApp/"
                     },
                     {
                         name: "iOS WhatsApp",
-                        description: "واتساب رسمي مع تحسينات iOS",
+                        description: "Official WhatsApp with iOS enhancements",
                         icon: "whatsapp-icon",
                         iconImage: "https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png",
                         link: "https://m7ashr213-cell.github.io/iOS-Store-WhatsApp/"
@@ -2155,12 +2164,12 @@
             // App Detail Data
             instagram: {
                 title: "Instagram",
-                description: "نسخة محسنة من انستجرام بميزات إضافية غير متاحة في الإصدار القياسي",
+                description: "Enhanced version of Instagram with additional features not available in the standard version",
                 features: [
-                    "تنزيل الصور ومقاطع الفيديو بجودة عالية",
-                    "تصفح بدون إعلانات",
-                    "مشاهدة القصص بشكل مجهول",
-                    "واجهة مستخدم محسنة ومخصصة"
+                    "Download photos and videos in high quality",
+                    "Browse without ads",
+                    "View stories anonymously",
+                    "Enhanced and customized user interface"
                 ],
                 iconClass: "fab fa-instagram",
                 iconColor: "instagram-icon",
@@ -2169,12 +2178,12 @@
             },
             telegram: {
                 title: "Telegram",
-                description: "تطبيق مراسلة فوري سريع وآمن بميزات متقدمة",
+                description: "Fast, secure instant messaging app with advanced features",
                 features: [
-                    "رسائل سرية ذاتية التدمير",
-                    "مكالمات صوتية وفيديو عالية الجودة",
-                    "دعم مجموعات كبيرة تصل إلى 200,000 عضو",
-                    "مزامنة فورية عبر جميع الأجهزة"
+                    "Self-destructing secret messages",
+                    "High-quality voice and video calls",
+                    "Support for large groups up to 200,000 members",
+                    "Instant synchronization across all devices"
                 ],
                 iconClass: "fab fa-telegram",
                 iconColor: "telegram-icon",
@@ -2183,12 +2192,12 @@
             },
             tiktok: {
                 title: "TikTok",
-                description: "منصة الفيديو القصيرة الرائدة مع تحسينات حصرية",
+                description: "Leading short video platform with exclusive enhancements",
                 features: [
-                    "تنزيل مقاطع الفيديو بدون علامة مائية",
-                    "مشاهدة الفيديوهات بدون انقطاع",
-                    "الوصول إلى جميع المؤثرات مجانًا",
-                    "واجهة مستخدم محسنة وسريعة"
+                    "Download videos without watermark",
+                    "Watch videos without interruption",
+                    "Access to all effects for free",
+                    "Enhanced and fast user interface"
                 ],
                 iconClass: "fab fa-tiktok",
                 iconColor: "tiktok-icon",
@@ -2197,12 +2206,12 @@
             },
             capcut: {
                 title: "CapCut",
-                description: "تطبيق تعديل الفيديو الاحترافي مع جميع الميزات المميزة مفتوحة",
+                description: "Professional video editing app with all premium features unlocked",
                 features: [
-                    "جميع المؤثرات والمرشحات متاحة مجانًا",
-                    "إزالة العلامة المائية تلقائيًا",
-                    "دعم تصدير الفيديو بدقة 4K",
-                    "مكتبة موسيقى خلفية شاملة بدون قيود"
+                    "All effects and filters available for free",
+                    "Automatic watermark removal",
+                    "Support for 4K video export",
+                    "Comprehensive background music library without restrictions"
                 ],
                 iconClass: "fas fa-scissors",
                 iconColor: "capcut-icon",
@@ -2211,12 +2220,12 @@
             },
             inshot: {
                 title: "InShot",
-                description: "تطبيق تعديل الفيديو المتقدم مع إزالة العلامة المائية",
+                description: "Advanced video editing app with watermark removal",
                 features: [
-                    "تعديل الفيديو بدون علامة مائية",
-                    "جميع الملصقات والمرشحات متاحة",
-                    "إضافة الموسيقى ومؤثرات صوتية متقدمة",
-                    "تصدير بدقة عالية مع معالجة سريعة"
+                    "Video editing without watermark",
+                    "All stickers and filters available",
+                    "Add music and advanced sound effects",
+                    "Export in high resolution with fast processing"
                 ],
                 iconClass: "fas fa-film",
                 iconColor: "inshot-icon",
@@ -2225,12 +2234,12 @@
             },
             picsart: {
                 title: "Picsart",
-                description: "تطبيق تعديل الصور الشامل مع جميع الميزات المميزة مفتوحة",
+                description: "Comprehensive photo editing app with all premium features unlocked",
                 features: [
-                    "جميع أدوات التعديل والمرشحات متاحة",
-                    "مكتبة ملصقات ورسومات غير محدودة",
-                    "إزالة الخلفية وخلفيات ذكية",
-                    "تصدير بدقة عالية بدون علامة مائية"
+                    "All editing tools and filters available",
+                    "Unlimited stickers and graphics library",
+                    "Background removal and smart backgrounds",
+                    "Export in high resolution without watermark"
                 ],
                 iconClass: "fas fa-paint-brush",
                 iconColor: "picsart-icon",
@@ -2239,12 +2248,12 @@
             },
             youtube: {
                 title: "YouTube Premium",
-                description: "استمتع بيوتيوب بدون إعلانات مع ميزات إضافية",
+                description: "Enjoy YouTube without ads with additional features",
                 features: [
-                    "مشاهدة الفيديوهات بدون انقطاع الإعلانات",
-                    "تشغيل الفيديو في الخلفية",
-                    "تنزيل الفيديوهات للمشاهدة دون اتصال",
-                    "دعم جودة الفيديو حتى 4K"
+                    "Watch videos without ad interruptions",
+                    "Background video playback",
+                    "Download videos for offline viewing",
+                    "Support for video quality up to 4K"
                 ],
                 iconClass: "fab fa-youtube",
                 iconColor: "youtube-icon",
@@ -2253,12 +2262,12 @@
             },
             spotify: {
                 title: "Spotify Premium",
-                description: "استمع إلى الموسيقى بدون إعلانات مع ميزات متقدمة",
+                description: "Listen to music without ads with advanced features",
                 features: [
-                    "استماع إلى الموسيقى بدون إعلانات",
-                    "تخطي الأغاني غير محدود",
-                    "تنزيل الأغاني للاستماع بدون اتصال",
-                    "جودة صوت عالية وميزات تحكم متقدمة"
+                    "Listen to music without ads",
+                    "Unlimited song skips",
+                    "Download songs for offline listening",
+                    "High sound quality and advanced control features"
                 ],
                 iconClass: "fab fa-spotify",
                 iconColor: "spotify-icon",
@@ -2267,12 +2276,12 @@
             },
             thispc: {
                 title: "This PC",
-                description: "حول هاتفك إلى تجربة كمبيوتر مع واجهة تشبه Windows",
+                description: "Turn your phone into a computer experience with Windows-like interface",
                 features: [
-                    "واجهة مستخدم تشبه Windows",
-                    "إدارة سهلة للملفات والمجلدات",
-                    "تشغيل التطبيقات في وضع الكمبيوتر",
-                    "تجربة مستخدم احترافية ومتقدمة"
+                    "Windows-like user interface",
+                    "Easy file and folder management",
+                    "Run applications in computer mode",
+                    "Professional and advanced user experience"
                 ],
                 iconClass: "fas fa-laptop",
                 iconColor: "thispc-icon",
@@ -2281,12 +2290,12 @@
             },
             studyapps: {
                 title: "Study Apps",
-                description: "تطبيقات تعليمية شاملة لطلاب المدارس الثانوية",
+                description: "Comprehensive educational apps for high school students",
                 features: [
-                    "منهج شامل للتعليم الثانوي",
-                    "دروس وتمارين تفاعلية",
-                    "مواد تحضيرية للامتحانات",
-                    "تتبع التقدم وتحليل الأداء"
+                    "Comprehensive high school curriculum",
+                    "Interactive lessons and exercises",
+                    "Exam preparation materials",
+                    "Progress tracking and performance analysis"
                 ],
                 iconClass: "fas fa-graduation-cap",
                 iconColor: "studyapps-icon",
@@ -2294,13 +2303,13 @@
                 link: "https://m7ashr213-cell.github.io/Study-Apps/"
             },
             watchapps: {
-                title: "Cinema Tv Apps",
-                description: "تطبيقات بث الأفلام والمسلسلات مع التفعيل المميز",
+                title: "Cinema & TV Apps",
+                description: "Movie and series streaming apps with premium activation",
                 features: [
-                    "مشاهدة الأفلام والمسلسلات بدون إعلانات",
-                    "دعم محتوى الأنمي بجودة عالية",
-                    "جميع الميزات المميزة مفعلة مجانًا",
-                    "واجهة مستخدم محسنة وسهلة الاستخدام"
+                    "Watch movies and series without ads",
+                    "Support for anime content in high quality",
+                    "All premium features activated for free",
+                    "Enhanced and easy-to-use user interface"
                 ],
                 iconClass: "fas fa-film",
                 iconColor: "watchapps-icon",
@@ -2309,12 +2318,12 @@
             },
             iosapps: {
                 title: "iOS Apps",
-                description: "مجموعة شاملة من تطبيقات iOS والأدوات المساعدة",
+                description: "Comprehensive collection of iOS apps and utilities",
                 features: [
-                    "مجموعة متنوعة من التطبيقات المميزة",
-                    "تحديثات مستمرة للتطبيقات",
-                    "واجهة بسيطة وسهلة الاستخدام",
-                    "دعم كامل لأحدث إصدارات iOS"
+                    "Variety of premium applications",
+                    "Continuous app updates",
+                    "Simple and easy-to-use interface",
+                    "Full support for latest iOS versions"
                 ],
                 iconClass: "fas fa-mobile-alt",
                 iconColor: "iosapps-icon",
@@ -2323,12 +2332,12 @@
             },
             shareit: {
                 title: "Shareit Lite",
-                description: "تطبيق مشاركة الملفات بسرعة عالية بدون إعلانات وبجودة محسنة",
+                description: "High-speed file sharing app without ads and with improved quality",
                 features: [
-                    "مشاركة الملفات بسرعة فائقة",
-                    "بدون إعلانات مزعجة",
-                    "دعم جميع أنواع الملفات",
-                    "واجهة مستخدم محسنة وسهلة الاستخدام"
+                    "Ultra-fast file sharing",
+                    "No annoying ads",
+                    "Support for all file types",
+                    "Enhanced and easy-to-use user interface"
                 ],
                 iconClass: "fas fa-share-alt",
                 iconColor: "shareit-icon",
@@ -2337,16 +2346,17 @@
             },
             larkplayer: {
                 title: "Lark Player",
-                description: "مشغل وسائط متقدم بمزايا متقدمة وجودة تشغيل محسنة بدون إعلانات",
+                description: "Advanced media player with premium features and enhanced playback quality without ads",
                 features: [
-                    "تشغيل جميع صيغ الوسائط",
-                    "بدون إعلانات أثناء التشغيل",
-                    "جودة تشغيل محسنة ووضوح عالي",
-                    "ميزات تحكم متقدمة وإعدادات مخصصة"
+                    "Play all media formats",
+                    "No ads during playback",
+                    "Enhanced playback quality and high clarity",
+                    "Advanced control features and custom settings"
                 ],
                 iconClass: "fas fa-play-circle",
                 iconColor: "larkplayer-icon",
-                iconImage: "https://t2.tudocdn.net/639248?w=1920",
+                // Updated Lark Player image URL
+                iconImage: "https://play-lh.googleusercontent.com/WfnBxlXCNhKPaBBL6VasmJw2YTURoGDFxKlJmyGdz_0b49z2nJeiaN3iCXwbcEObvzg=w240-h480-rw",
                 link: "https://m7ashr213-cell.github.io/Lark-Player/"
             }
         };
@@ -2531,19 +2541,19 @@
                 
                 const message = new SpeechSynthesisUtterance();
                 message.text = "Welcome to iOS Store";
-                message.lang = 'ar-SA';
-                message.rate = 0.9; // Speech speed
+                message.lang = 'en-US';
+                message.rate = 1.0; // Speech speed
                 message.pitch = 1; // Voice pitch
                 message.volume = 1; // Volume level
                 
-                // Try to use an Arabic voice if available
+                // Try to use an English voice if available
                 const voices = speechSynthesis.getVoices();
-                const arabicVoice = voices.find(voice => 
-                    voice.lang.includes('ar')
+                const englishVoice = voices.find(voice => 
+                    voice.lang.includes('en')
                 );
                 
-                if (arabicVoice) {
-                    message.voice = arabicVoice;
+                if (englishVoice) {
+                    message.voice = englishVoice;
                 }
                 
                 window.speechSynthesis.speak(message);
@@ -2597,7 +2607,7 @@
                                     <p>${option.description}</p>
                                 </div>
                             </div>
-                            <a href="${option.link}" class="download-btn" target="_blank">تحميل التطبيق</a>
+                            <a href="${option.link}" class="download-btn" target="_blank">Download App</a>
                         `;
                         downloadOptions.appendChild(optionElement);
                     });
@@ -2677,7 +2687,7 @@
             setTimeout(() => {
                 speechSynthesis.getVoices();
                 
-                // Play Arabic welcome message after page loads
+                // Play English welcome message after page loads
                 setTimeout(() => {
                     playWelcomeMessage();
                 }, 1000);
@@ -2686,4 +2696,3 @@
     </script>
 </body>
 </html>
-
